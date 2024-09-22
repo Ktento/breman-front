@@ -5,7 +5,7 @@ void main() {
   runApp(MaterialApp(
     home: Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
+      body: SingleChildScrollView( // スクロールを可能にする
         child: Builder(
           builder: (BuildContext context) {
             return Column(
@@ -53,7 +53,7 @@ void main() {
                 Container(
                   color: const Color.fromARGB(58, 244, 67, 54),
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 100,
+                  height: 1000,
                   child: Row(
                     children: [
                       Expanded(
