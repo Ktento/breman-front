@@ -53,7 +53,7 @@ void main() {
                 Container(
                   color: const Color.fromARGB(58, 244, 67, 54),
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 1000,
+                  height: 300,
                   child: Row(
                     children: [
                       Expanded(
@@ -65,6 +65,63 @@ void main() {
                               alignment: Alignment.topLeft, // 上左寄りに配置
                               child: Text(
                                 'ランキング',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+
+                // グループコンテナ
+                Container(
+                  color: const Color.fromARGB(57, 207, 255, 34),
+                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
+                  height: 300,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Align(
+                              alignment: Alignment.topLeft, // 上左寄りに配置
+                              child: Text(
+                                'グループ',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // あなたのお気に入りコンテナ
+                Container(
+                  color: const Color.fromARGB(57, 54, 127, 244),
+                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
+                  height: 300,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Align(
+                              alignment: Alignment.topLeft, // 上左寄りに配置
+                              child: Text(
+                                'あなたのお気に入り',
                                 style: TextStyle(
                                   fontSize: 18,
                                 ),
