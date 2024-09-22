@@ -18,7 +18,11 @@ void main() {
                 alignment: Alignment.centerLeft, // 左揃えに設定
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0), // 左に余白を追加
-                  child: Text('ホーム', style: TextStyle(fontSize: 20)),
+                  child: Text('ホーム', 
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold, // 太字に設定
+                    )),
                 ),
               ),
             ),
