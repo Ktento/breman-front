@@ -13,8 +13,12 @@ void main() {
               color: const Color.fromARGB(255, 156, 156, 156), // 背景色
               width: 1000, // 幅
               height: 100, // 高さ
-              child: Center(
-                child: Text('ホーム', style: TextStyle(fontSize: 20)), // Container内のテキスト
+              child: Align(
+                alignment: Alignment.centerLeft, // 左揃えに設定
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0), // 左に余白を追加
+                  child: Text('ホーム', style: TextStyle(fontSize: 20)),
+                ),
               ),
             ),
             SizedBox(height: 20), // 2つのコンテナ間にスペースを追加
