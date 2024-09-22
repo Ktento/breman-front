@@ -13,8 +13,9 @@ void main() {
               children: [
                 // ホームコンテナ
                 Container(
+                  color: const Color.fromARGB(57, 67, 54, 244),
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 200, // 高さ
+                  height: 100, // 高さ
                   child: Row(
                     children: [
                       Expanded(
@@ -48,7 +49,6 @@ void main() {
                     ],
                   ),
                 ),
-                SizedBox(height: 10), // スペース追加
 
                 // ランキングコンテナ
                 Container(
