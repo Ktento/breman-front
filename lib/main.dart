@@ -37,7 +37,11 @@ void main() {
                   Padding(
                     padding: const EdgeInsets.only(right: 16.0), // 右に余白を追加
                     child: IconButton(
-                      icon: Icon(Icons.account_circle, size: 30), // アカウントアイコン
+                      icon: Icon(Icons.account_circle, //アイコン画像
+                          size: 30, //サイズ
+                          color: const Color.fromRGBO(236, 212, 29, 1) //色
+                          ), // アカウントアイコン
+
                       onPressed: () {
                         // アイコンボタンが押された時の処理
                         print('アカウントボタンが押されました');
