@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
+      backgroundColor: Colors.white,
       body: Align(
         alignment: Alignment.topCenter, // 上揃え
         child: Column( // 縦並びにする
           mainAxisSize: MainAxisSize.min, // Columnのサイズを中身に合わせる
           children: [
             Container(  // コンテナ要素
-              color: const Color.fromARGB(255, 156, 156, 156), // 背景色
+            color: const Color.fromARGB(135, 182, 179, 179),
               width: 1000, // 幅
-              height: 100, // 高さ
+              height: 80, // 高さ
               child: Align(
                 alignment: Alignment.centerLeft, // 左揃えに設定
                 child: Padding(
