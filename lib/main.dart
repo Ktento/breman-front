@@ -70,8 +70,7 @@ void main() {
                         child: Text(
                           'ランキング',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold, // 太字に設定
+                            fontSize: 18,
                           ),
                         ),
                       ),
