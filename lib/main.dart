@@ -62,10 +62,13 @@ void main() {
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              'ランキング',
-                              style: TextStyle(
-                                fontSize: 18,
+                            child: Align(
+                              alignment: Alignment.topLeft, // 上左寄りに配置
+                              child: Text(
+                                'ランキング',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ),
