@@ -11,8 +11,10 @@ void main() {
           // 縦並びにする
           mainAxisSize: MainAxisSize.min, // Columnのサイズを中身に合わせる
           children: [
+
+
+            // ホームコンテナ
             Container(
-              // コンテナ要素
               width: 1000, // 幅
               height: 50, // 高さ
               child: Row(
@@ -50,11 +52,33 @@ void main() {
                 ],
               ),
             ),
-            SizedBox(height: 20), // 2つのコンテナ間にスペースを追加
+            SizedBox(height: 10), // 2つのコンテナ間にスペースを追加
+
+
+            //ランキングコンテナ
             Container(
-              color: Colors.red, // 背景色
+              color: const Color.fromARGB(58, 244, 67, 54), // 背景色
               width: 1000, // 幅
               height: 100, // 高さ
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft, // 左揃えに設定
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0), // 左に余白を追加
+                        child: Text(
+                          'ランキング',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold, // 太字に設定
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
