@@ -15,7 +15,7 @@ void main() {
               // コンテナ要素
               color: const Color.fromARGB(135, 182, 179, 179),
               width: 1000, // 幅
-              height: 80, // 高さ
+              height: 50, // 高さ
               child: Row(
                 // 横並びにする
                 children: [
