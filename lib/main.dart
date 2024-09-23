@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'account_profile.dart';
 
 // メイン関数
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView( // スクロールを可能にする
+      body: SingleChildScrollView(
+        // スクロールを可能にする
         child: Builder(
           builder: (BuildContext context) {
             return Column(
@@ -42,6 +44,11 @@ void main() {
                           ),
                           onPressed: () {
                             print('アカウントボタンが押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => AccountProfile()));
                           },
                         ),
                       ),
@@ -76,7 +83,6 @@ void main() {
                     ],
                   ),
                 ),
-
 
                 // グループコンテナ
                 Container(
