@@ -10,7 +10,6 @@ class AccountProfile extends StatelessWidget {
           children: [
             // 戻るボタンを含むコンテナ
             Container(
-              color: const Color.fromARGB(84, 243, 85, 85),
               padding: EdgeInsets.only(top: 20, left: 16, right: 16), // 上部余白を調整
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
