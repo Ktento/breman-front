@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'プロフィール',
+                    'ログイン',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -32,8 +32,22 @@ class Login extends StatelessWidget {
             // その他のコンテンツをここに追加
             Container(
               padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'メールアドレス'), //メアド入力フォーム
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'パスワード'), //メアド入力フォーム
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(16.0),
               child: Text(
-                'ここにアカウント情報を表示',
+                'ログイン',
                 style: TextStyle(fontSize: 18),
               ),
             ),
