@@ -41,14 +41,21 @@ class Login extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'パスワード'), //メアド入力フォーム
+                    border: InputBorder.none, hintText: 'パスワード'), //パスワード入力フォーム
               ),
             ),
             Container(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'ログイン',
-                style: TextStyle(fontSize: 18),
+              child: ElevatedButton(
+                child: const Text('ログイン'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15), // 角の丸みを調整
+                    ),
+                ),
+                onPressed: () {},//ログインボタンを押したときの処理
               ),
             ),
           ],
