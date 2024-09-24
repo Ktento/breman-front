@@ -37,7 +37,7 @@ class AccountProfile extends StatelessWidget {
               height: 250, // 高さ
               alignment: Alignment.center, // ボタンを中央に配置
               child: SizedBox(
-                width: 250,  // ボタンの幅
+                width: 250, // ボタンの幅
                 height: 30, // ボタンの高さ
                 child: ElevatedButton(
                   child: const Text('アカウント情報を編集'),
@@ -52,6 +52,27 @@ class AccountProfile extends StatelessWidget {
                     // ボタンを押したときの処理
                   },
                 ),
+              ),
+            ),
+
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          '名前',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
