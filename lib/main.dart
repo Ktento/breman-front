@@ -141,7 +141,7 @@ void main() {
                   ),
                 ),
 
-                //テスト用
+                //////////ログイン画面テスト用//////////
                 Container(
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
                   height: 100, // 高さ
@@ -153,7 +153,7 @@ void main() {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 16.0),
                             child: Text(
-                              'ホーム',
+                              'ログイン画面へ(仮)',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -183,7 +183,7 @@ void main() {
                     ],
                   ),
                 ),
-
+                //////////ここまで//////////
 
 
 
