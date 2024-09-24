@@ -22,7 +22,7 @@ class AccountProfile extends StatelessWidget {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'アカウントプロフィール',
+                    'プロフィール',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
