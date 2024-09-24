@@ -44,6 +44,9 @@ class AccountProfile extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange, // 背景色
                     foregroundColor: Colors.white, // 文字色
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5), // 角の丸みを調整
+                    ),
                   ),
                   onPressed: () {
                     // ボタンを押したときの処理
