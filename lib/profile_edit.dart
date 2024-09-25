@@ -23,7 +23,7 @@ class ProfileEdit extends StatelessWidget {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'プロフィール',
+                    'プロフィール編集',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
