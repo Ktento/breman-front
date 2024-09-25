@@ -52,10 +52,20 @@ class Login extends StatelessWidget {
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15), // 角の丸みを調整
-                    ),
+                    borderRadius: BorderRadius.circular(15), // 角の丸みを調整
+                  ),
                 ),
-                onPressed: () {},//ログインボタンを押したときの処理
+                onPressed: () {}, //ログインボタンを押したときの処理
+              ),
+            ),
+            Container(
+              // Flutter1.22以降のみ
+              child: TextButton(
+                child: const Text('アカウント作成'),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.orange,
+                ),
+                onPressed: () {},
               ),
             ),
           ],
