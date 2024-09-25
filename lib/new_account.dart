@@ -87,6 +87,6 @@ class NewAccount extends StatelessWidget {
           ],
         ),
       ),
-    );//a
+    );
   }
 }
