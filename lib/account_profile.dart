@@ -28,13 +28,27 @@ class AccountProfile extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             // その他のコンテンツをここに追加
             Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'ここにアカウント情報を表示',
-                style: TextStyle(fontSize: 18),
+              color: const Color.fromARGB(109, 40, 255, 90),
+              width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
+              height: 300,
+            ),
+            // ボタンコンテナ
+            Container(
+              color: const Color.fromARGB(108, 40, 158, 255),
+              child: ElevatedButton(
+                onPressed: () {}, // ログインボタンを押したときの処理
+                child: const Text('アカウントを編集'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  foregroundColor: Colors.white,
+                  minimumSize: Size(120, 30), // ボタンの最小サイズを指定
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7), // 角の丸みを調整
+                  ),
+                ),
               ),
             ),
           ],
