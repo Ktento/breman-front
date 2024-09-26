@@ -30,7 +30,7 @@ class AddFriend extends StatelessWidget {
               ),
             ),
 
-             Container(
+            Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
