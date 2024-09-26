@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
 
+bool login = false;
+
 // メイン関数
 void main() {
   runApp(MaterialApp(
@@ -44,12 +46,21 @@ void main() {
                             color: const Color.fromRGBO(236, 212, 29, 1),
                           ),
                           onPressed: () {
-                            print('アカウントボタンが押されました');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    builder: (context) => AccountProfile()));
+                            if (login = false) {
+                              print('アカウントボタンが押されました');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      // （2） 実際に表示するページ(ウィジェット)を指定する
+                                      builder: (context) => AccountProfile()));
+                            } else {
+                              print('アカウントボタンが押されました');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      // （2） 実際に表示するページ(ウィジェット)を指定する
+                                      builder: (context) => Login()));
+                            }
                           },
                         ),
                       ),
@@ -184,9 +195,6 @@ void main() {
                   ),
                 ),
                 //////////ここまで//////////
-
-
-
               ],
             );
           },
