@@ -46,7 +46,7 @@ void main() {
                             color: const Color.fromRGBO(236, 212, 29, 1),
                           ),
                           onPressed: () {
-                            if (login = false) {
+                            if (login == true) {
                               print('アカウントボタンが押されました');
                               Navigator.push(
                                   context,
