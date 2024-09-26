@@ -41,6 +41,33 @@ void main() {
                         padding: const EdgeInsets.only(right: 16.0),
                         child: IconButton(
                           icon: Icon(
+                            Icons.person,
+                            size: 30,
+                            color: const Color.fromRGBO(236, 212, 29, 1),
+                          ),
+                          onPressed: () {
+                            if (login == true) {
+                              print('アカウントボタンが押されました');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      // （2） 実際に表示するページ(ウィジェット)を指定する
+                                      builder: (context) => AccountProfile()));
+                            } else {
+                              print('アカウントボタンが押されました');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      // （2） 実際に表示するページ(ウィジェット)を指定する
+                                      builder: (context) => Login()));
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 16.0),
+                        child: IconButton(
+                          icon: Icon(
                             Icons.account_circle,
                             size: 30,
                             color: const Color.fromRGBO(236, 212, 29, 1),
