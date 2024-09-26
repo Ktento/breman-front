@@ -30,25 +30,10 @@ class AddFriend extends StatelessWidget {
               ),
             ),
 
-            // その他のコンテンツをここに追加
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'メールアドレス'), //メアド入力フォーム
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'パスワード'), //パスワード入力フォーム
-              ),
-            ),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                child: const Text('ログイン'),
+                child: const Text('フレンド追加'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,

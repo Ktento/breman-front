@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
+import 'add_friend.dart';
 
 bool login = false;
 
@@ -46,21 +47,12 @@ void main() {
                             color: const Color.fromRGBO(236, 212, 29, 1),
                           ),
                           onPressed: () {
-                            if (login == true) {
-                              print('アカウントボタンが押されました');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      // （2） 実際に表示するページ(ウィジェット)を指定する
-                                      builder: (context) => AccountProfile()));
-                            } else {
-                              print('アカウントボタンが押されました');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      // （2） 実際に表示するページ(ウィジェット)を指定する
-                                      builder: (context) => Login()));
-                            }
+                            print('アカウントボタンが押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => AddFriend()));
                           },
                         ),
                       ),
