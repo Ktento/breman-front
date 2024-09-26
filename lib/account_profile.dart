@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'profile_edit.dart';
+import 'profile_edit.dart';
 
 class AccountProfile extends StatelessWidget {
   @override
@@ -50,12 +50,12 @@ class AccountProfile extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    //print('アカウントボタンが押されました');
-                           // Navigator.push(
-                               // context,
-                               //R MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    //Rbuilder: (context) => ProfileEdit()));
+                    print('アカウントボタンが押されました');
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            //（2） 実際に表示するページ(ウィジェット)を指定する
+                            builder: (context) => ProfileEdit()));
                   },
                 ),
               ),
