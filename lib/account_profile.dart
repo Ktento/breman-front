@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profile_edit.dart';
 
 class AccountProfile extends StatelessWidget {
   @override
@@ -31,24 +32,53 @@ class AccountProfile extends StatelessWidget {
 
             // その他のコンテンツをここに追加
             Container(
-              color: const Color.fromARGB(109, 40, 255, 90),
+              padding: const EdgeInsets.all(16.0),
+              color: const Color.fromARGB(119, 0, 0, 0),
               width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-              height: 300,
-            ),
-            // ボタンコンテナ
-            Container(
-              color: const Color.fromARGB(108, 40, 158, 255),
-              child: ElevatedButton(
-                onPressed: () {}, // ログインボタンを押したときの処理
-                child: const Text('アカウントを編集'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  foregroundColor: Colors.white,
-                  minimumSize: Size(120, 30), // ボタンの最小サイズを指定
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7), // 角の丸みを調整
+              height: 250, // 高さ
+              alignment: Alignment.center, // ボタンを中央に配置
+              child: SizedBox(
+                width: 250, // ボタンの幅
+                height: 30, // ボタンの高さ
+                child: ElevatedButton(
+                  child: const Text('アカウント情報を編集'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange, // 背景色
+                    foregroundColor: Colors.white, // 文字色
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5), // 角の丸みを調整
+                    ),
                   ),
+                  onPressed: () {
+                    print('アカウントボタンが押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => ProfileEdit()));
+                  },
                 ),
+              ),
+            ),
+
+            Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          '名前',
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
