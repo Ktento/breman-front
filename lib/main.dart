@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
+import 'add_friend.dart';
 
 bool login = false;
 
@@ -52,7 +53,7 @@ void main() {
                                   context,
                                   MaterialPageRoute(
                                       // （2） 実際に表示するページ(ウィジェット)を指定する
-                                      builder: (context) => AccountProfile()));
+                                      builder: (context) => AddFriend()));
                             } else {
                               print('アカウントボタンが押されました');
                               Navigator.push(
