@@ -17,7 +17,7 @@ final List<String> r_imageUrls = [
 final List<String> g_imageUrls = [
   'https://i.pinimg.com/236x/37/f6/28/37f628fcafd4fd222cc3c3899948e84b.jpg',
   'https://i.pinimg.com/474x/b4/0f/be/b40fbe8222a7a493db26b36ee8c1550a.jpg',
-  'https://i.pinimg.com/originals/14/49/56/1449568e50aa4db5ef79f5bc2822bd68.gif',
+  'https://i.pinimg.com/236x/a3/73/0f/a3730ff74e7832087740c2a128538f3f.jpg',
   'https://i.pinimg.com/236x/94/a3/ae/94a3ae1dda96ad0c71d6a396856b2025.jpg',
   'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg',
   'https://i.pinimg.com/236x/de/67/54/de67546f2a3cfedae325399aa55fedef.jpg',
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       icon: Icon(
                         Icons.account_circle,
                         size: 30,
-                        color: const Color.fromRGBO(255, 255, 152, 0),
+                        color: const Color.fromARGB(255, 255, 152, 0),
                       ),
                       onPressed: () {
                         if (login) {
