@@ -5,6 +5,26 @@ import 'add_friend.dart';
 
 bool login = false;
 
+// グループ画像のURLリスト
+final List<String> g_imageUrls = [
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+];
+
+// グループ画像のURLリスト
+final List<String> f_imageUrls = [
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+];
+
 // メイン関数
 void main() {
   runApp(MaterialApp(
@@ -134,30 +154,32 @@ void main() {
                           margin: EdgeInsets.all(20),
                           child: Image.network(
                               'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
-                        ),Container(
-                          width: 200, // 画面の幅に合わせる
-                          height: 200,
-                          margin: EdgeInsets.all(20),
-                          child: Image.network(
-                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
-                        ),Container(
+                        ),
+                        Container(
                           width: 200, // 画面の幅に合わせる
                           height: 200,
                           margin: EdgeInsets.all(20),
                           child: Image.network(
                               'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
                         ),
-                        
+                        Container(
+                          width: 200, // 画面の幅に合わせる
+                          height: 200,
+                          margin: EdgeInsets.all(20),
+                          child: Image.network(
+                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                        ),
                       ],
                     ),
                   ),
                 ),
 
                 // グループコンテナ
+                // あなたのお気に入りコンテナ
                 Container(
-                  color: const Color.fromARGB(57, 207, 255, 34),
+                  color: const Color.fromARGB(57, 255, 255, 255),
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 300,
+                  height: 30,
                   child: Row(
                     children: [
                       Expanded(
@@ -170,7 +192,7 @@ void main() {
                               child: Text(
                                 'グループ',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -181,11 +203,34 @@ void main() {
                   ),
                 ),
 
+                Container(
+                  height: 300, // 高さを固定
+                  margin: EdgeInsets.all(8), // 各アイテムにマージンを追加
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // グリッドの列数
+                      crossAxisSpacing: 3, // グリッドの横方向のスペース
+                      mainAxisSpacing: 3, // グリッドの縦方向のスペース
+                    ),
+                    itemCount: g_imageUrls.length, // グリッドに表示するアイテムの数
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        margin: EdgeInsets.all(10), // 各アイテムのマージン
+                        child: Image.network(
+                          g_imageUrls[index], // リストから画像のURLを取得
+                          fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
                 // あなたのお気に入りコンテナ
                 Container(
-                  color: const Color.fromARGB(57, 54, 127, 244),
+                  color: const Color.fromARGB(112, 255, 255, 255),
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 300,
+                  height: 30,
                   child: Row(
                     children: [
                       Expanded(
@@ -198,7 +243,7 @@ void main() {
                               child: Text(
                                 'あなたのお気に入り',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -206,6 +251,29 @@ void main() {
                         ),
                       ),
                     ],
+                  ),
+                ),
+
+                Container(
+                  height: 300, // 高さを固定
+                  margin: EdgeInsets.all(8), // 各アイテムにマージンを追加
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // グリッドの列数
+                      crossAxisSpacing: 3, // グリッドの横方向のスペース
+                      mainAxisSpacing: 3, // グリッドの縦方向のスペース
+                    ),
+                    itemCount: f_imageUrls.length, // グリッドに表示するアイテムの数
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        margin: EdgeInsets.all(10), // 各アイテムのマージン
+                        child: Image.network(
+                          f_imageUrls[index], // リストから画像のURLを取得
+                          fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                        ),
+                      );
+                    },
                   ),
                 ),
 
