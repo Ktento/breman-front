@@ -1,3 +1,4 @@
+import 'package:bremen_fe/new_account.dart';
 import 'package:flutter/material.dart';
 import 'new_account.dart';
 
@@ -67,7 +68,7 @@ class Login extends StatelessWidget {
                   foregroundColor: Colors.orange,
                 ),
                 onPressed: () {
-                  print('アカウント作成ボタンが押されました');
+                  print('ログインボタンが押されました');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
