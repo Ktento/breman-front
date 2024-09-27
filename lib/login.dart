@@ -35,14 +35,18 @@ class Login extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'メールアドレス'), //メアド入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'ユーザID', // メアド入力フォーム
+                ),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'パスワード'), //パスワード入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'パスワード', // パスワード入力フォーム
+                ),
               ),
             ),
             Container(
