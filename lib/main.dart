@@ -5,6 +5,14 @@ import 'add_friend.dart';
 
 bool login = false;
 
+// ランキング画像のURLリスト
+final List<String>  r_imageUrls = [
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
+  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+];
+
 // グループ画像のURLリスト
 final List<String> g_imageUrls = [
   'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
@@ -135,72 +143,35 @@ void main() {
                   ),
                 ),
 
-                Center(
-                  child: SingleChildScrollView(
-                    // スクロール
-                    scrollDirection: Axis.horizontal, // スクロールの方向、水平
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 200,
-                          height: 200,
-                          margin: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20), // 角を丸くする
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 200,
-                          height: 200,
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20), // 角を丸くする
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 200,
-                          height: 200,
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20), // 角を丸くする
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 200,
-                          height: 200,
-                          margin: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), // 角を丸くする
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                // Center内のSingleChildScrollViewを以下のように修正
+Center(
+  child: SingleChildScrollView(
+    scrollDirection: Axis.horizontal, // スクロールの方向、水平
+    child: Row(
+      children: r_imageUrls.map((url) {
+        return GestureDetector(
+          onTap: () {
+            // 画像がタップされたときの処理
+            print('画像がタップされました: $url');
+            // 必要に応じて画面遷移などをここで行うことができます
+          },
+          child: Container(
+            width: 200,
+            height: 200,
+            margin: EdgeInsets.all(20), // マージンを調整１
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), // 角を丸くする
+              image: DecorationImage(
+                image: NetworkImage(url), // リストから画像のURLを取得
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        );
+      }).toList(), // mapをtoListでリストに変換
+    ),
+  ),
+),
 
                 // グループコンテナ
                 // あなたのお気に入りコンテナ
@@ -231,6 +202,7 @@ void main() {
                   ),
                 ),
 
+                // グループコンテナ
                 Container(
                   height: 300, // 高さを固定
                   margin: EdgeInsets.all(8), // 各アイテムにマージンを追加
@@ -243,14 +215,22 @@ void main() {
                     ),
                     itemCount: g_imageUrls.length, // グリッドに表示するアイテムの数
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: EdgeInsets.all(10), // 各アイテムのマージン
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10), // ボーダー半径の設定
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                f_imageUrls[index]), // リストから画像のURLを取得
-                            fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                      return GestureDetector(
+                        onTap: () {
+                          // 画像がタップされたときの処理
+                          print('画像がタップされました: ${g_imageUrls[index]}');
+                          // ここで別の画面に遷移することも可能
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10), // 各アイテムのマージン
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // ボーダー半径の設定
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  g_imageUrls[index]), // リストから画像のURLを取得
+                              fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                            ),
                           ),
                         ),
                       );
@@ -286,6 +266,7 @@ void main() {
                   ),
                 ),
 
+                // グループコンテナ
                 Container(
                   height: 300, // 高さを固定
                   margin: EdgeInsets.all(8), // 各アイテムにマージンを追加
@@ -298,14 +279,22 @@ void main() {
                     ),
                     itemCount: f_imageUrls.length, // グリッドに表示するアイテムの数
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        margin: EdgeInsets.all(10), // 各アイテムのマージン
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10), // ボーダー半径の設定
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                f_imageUrls[index]), // リストから画像のURLを取得
-                            fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                      return GestureDetector(
+                        onTap: () {
+                          // 画像がタップされたときの処理
+                          print('画像がタップされました: ${g_imageUrls[index]}');
+                          // ここで別の画面に遷移することも可能
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(10), // 各アイテムのマージン
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(10), // ボーダー半径の設定
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  f_imageUrls[index]), // リストから画像のURLを取得
+                              fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                            ),
                           ),
                         ),
                       );
