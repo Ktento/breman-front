@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'profile_edit.dart';
+import 'main.dart';
 
 class AccountProfile extends StatefulWidget {
   @override
@@ -124,7 +125,11 @@ class _AccountProfileState extends State<AccountProfile> {
 
           switch (index) {
             case 0:
-              Navigator.pop(context); // ホーム画面に戻る場合
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+                (Route<dynamic> route) => false,
+              );
               break;
             case 1:
               // お気に入り画面の処理
