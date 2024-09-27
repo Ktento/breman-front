@@ -89,9 +89,9 @@ void main() {
 
                 // ランキングコンテナ
                 Container(
-                  color: const Color.fromARGB(58, 244, 67, 54),
+                  color: const Color.fromARGB(57, 255, 255, 255),
                   width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 300,
+                  height: 40,
                   child: Row(
                     children: [
                       Expanded(
@@ -104,7 +104,7 @@ void main() {
                               child: Text(
                                 'ランキング',
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 20,
                                 ),
                               ),
                             ),
@@ -112,6 +112,44 @@ void main() {
                         ),
                       ),
                     ],
+                  ),
+                ),
+
+                Center(
+                  child: SingleChildScrollView(
+                    // スクロール
+                    scrollDirection: Axis.horizontal, // スクロールの方向、水平
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 200, // 画面の幅に合わせる
+                          height: 200,
+                          margin: EdgeInsets.all(20),
+                          child: Image.network(
+                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                        ),
+                        Container(
+                          width: 200, // 画面の幅に合わせる
+                          height: 200,
+                          margin: EdgeInsets.all(20),
+                          child: Image.network(
+                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                        ),Container(
+                          width: 200, // 画面の幅に合わせる
+                          height: 200,
+                          margin: EdgeInsets.all(20),
+                          child: Image.network(
+                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                        ),Container(
+                          width: 200, // 画面の幅に合わせる
+                          height: 200,
+                          margin: EdgeInsets.all(20),
+                          child: Image.network(
+                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                        ),
+                        
+                      ],
+                    ),
                   ),
                 ),
 
