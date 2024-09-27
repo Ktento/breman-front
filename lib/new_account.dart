@@ -35,22 +35,37 @@ class NewAccount extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'メールアドレス'), //メアド入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'ユーザID', // メアド入力フォーム
+                ),
+              ),
+            ),
+
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'ユーザ名', // メアド入力フォーム
+                ),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'パスワード'), //パスワード入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'パスワード', // メアド入力フォーム
+                ),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'パスワード(確認用)'), //パスワード入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'パスワード(確認用)', // メアド入力フォーム
+                ),
               ),
             ),
             Container(
