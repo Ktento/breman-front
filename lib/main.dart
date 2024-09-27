@@ -142,32 +142,60 @@ void main() {
                     child: Row(
                       children: [
                         Container(
-                          width: 200, // 画面の幅に合わせる
+                          width: 200,
                           height: 200,
                           margin: EdgeInsets.all(20),
-                          child: Image.network(
-                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20), // 角を丸くする
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         Container(
-                          width: 200, // 画面の幅に合わせる
+                          width: 200,
                           height: 200,
-                          margin: EdgeInsets.all(20),
-                          child: Image.network(
-                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20), // 角を丸くする
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         Container(
-                          width: 200, // 画面の幅に合わせる
+                          width: 200,
                           height: 200,
-                          margin: EdgeInsets.all(20),
-                          child: Image.network(
-                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                          margin: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20), // 角を丸くする
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                         Container(
-                          width: 200, // 画面の幅に合わせる
+                          width: 200,
                           height: 200,
                           margin: EdgeInsets.all(20),
-                          child: Image.network(
-                              'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9'),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10), // 角を丸くする
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -217,9 +245,13 @@ void main() {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         margin: EdgeInsets.all(10), // 各アイテムのマージン
-                        child: Image.network(
-                          g_imageUrls[index], // リストから画像のURLを取得
-                          fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10), // ボーダー半径の設定
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                f_imageUrls[index]), // リストから画像のURLを取得
+                            fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                          ),
                         ),
                       );
                     },
@@ -268,9 +300,13 @@ void main() {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         margin: EdgeInsets.all(10), // 各アイテムのマージン
-                        child: Image.network(
-                          f_imageUrls[index], // リストから画像のURLを取得
-                          fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10), // ボーダー半径の設定
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                f_imageUrls[index]), // リストから画像のURLを取得
+                            fit: BoxFit.cover, // 画像をコンテナにフィットさせる
+                          ),
                         ),
                       );
                     },
