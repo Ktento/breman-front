@@ -66,6 +66,7 @@ class NewAccount extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'パスワード(確認用)', // メアド入力フォーム
                 ),
+                obscureText: true, //入力内容を非表示
               ),
             ),
             Container(
