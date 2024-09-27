@@ -62,7 +62,9 @@ class Login extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15), // 角の丸みを調整
                   ),
                 ),
-                onPressed: () {}, //ログインボタンを押したときの処理
+                onPressed: () {
+                  print('ログインボタンが押されました');
+                }, //ログインボタンを押したときの処理
               ),
             ),
             Container(
@@ -73,7 +75,7 @@ class Login extends StatelessWidget {
                   foregroundColor: Colors.orange,
                 ),
                 onPressed: () {
-                  print('ログインボタンが押されました');
+                  print('アカウント新規作成が押されました');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
