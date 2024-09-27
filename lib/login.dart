@@ -48,6 +48,7 @@ class Login extends StatelessWidget {
                   border: OutlineInputBorder(),
                   hintText: 'パスワード', // パスワード入力フォーム
                 ),
+                obscureText: true,
               ),
             ),
             Container(
