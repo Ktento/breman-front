@@ -3,353 +3,355 @@ import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 
-bool login = false;
+bool login = true;
 
 // ランキング画像のURLリスト
-final List<String>  r_imageUrls = [
+final List<String> r_imageUrls = [
   'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://i.pinimg.com/236x/b8/44/62/b84462069b5784e0bf29d3ce1426925d.jpg',
+  'https://i.pinimg.com/236x/41/56/a6/4156a68baa1b6779860a3ab33d1acfda.jpg',
+  'https://i.pinimg.com/236x/9c/90/59/9c9059cb64d005cd1cb0fdbdf3cbdfde.jpg',
 ];
 
 // グループ画像のURLリスト
 final List<String> g_imageUrls = [
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://i.pinimg.com/236x/37/f6/28/37f628fcafd4fd222cc3c3899948e84b.jpg',
+  'https://i.pinimg.com/474x/b4/0f/be/b40fbe8222a7a493db26b36ee8c1550a.jpg',
+  'https://i.pinimg.com/originals/14/49/56/1449568e50aa4db5ef79f5bc2822bd68.gif',
+  'https://i.pinimg.com/236x/94/a3/ae/94a3ae1dda96ad0c71d6a396856b2025.jpg',
+  'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg',
+  'https://i.pinimg.com/236x/de/67/54/de67546f2a3cfedae325399aa55fedef.jpg',
 ];
 
 // グループ画像のURLリスト
 final List<String> f_imageUrls = [
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwYj5xgn43t-7S9pGZk1-9UOK1apbnt5e48Q&s',
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
+  'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg',
+  'https://i.pinimg.com/236x/f8/0c/4c/f80c4c91f707605b2dbb8bf412316ca5.jpg',
+  'https://i.pinimg.com/236x/ec/1b/ef/ec1befcde4d75fbb9ec6146ac4a2fb1c.jpg',
+  'https://i.pinimg.com/236x/8c/b1/f7/8cb1f773d581ff99bede558d0eb758ba.jpg',
+  'https://i.pinimg.com/736x/68/26/d5/6826d5f7d9535605cdca6d648dae66c0.jpg',
+  'https://i.pinimg.com/236x/a3/73/0f/a3730ff74e7832087740c2a128538f3f.jpg',
 ];
 
 // メイン関数
 void main() {
   runApp(MaterialApp(
-    home: Scaffold(
-      backgroundColor: Colors.white,
+    home: MyHomePage(),
+  ));
+}
+
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0; // 現在選択されているインデックス
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: SingleChildScrollView(
         // スクロールを可能にする
-        child: Builder(
-          builder: (BuildContext context) {
-            return Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                // ホームコンテナ
-                Container(
-                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 100, // 高さ
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              'ホーム',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // ホームコンテナ
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'ホーム',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.person,
-                            size: 30,
-                            color: const Color.fromRGBO(236, 212, 29, 1),
-                          ),
-                          onPressed: () {
-                            print('アカウントボタンが押されました');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    builder: (context) => AddFriend()));
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.account_circle,
-                            size: 30,
-                            color: const Color.fromRGBO(236, 212, 29, 1),
-                          ),
-                          onPressed: () {
-                            if (login == true) {
-                              print('アカウントボタンが押されました');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      // （2） 実際に表示するページ(ウィジェット)を指定する
-                                      builder: (context) => AccountProfile()));
-                            } else {
-                              print('アカウントボタンが押されました');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      // （2） 実際に表示するページ(ウィジェット)を指定する
-                                      builder: (context) => Login()));
-                            }
-                          },
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-
-                // ランキングコンテナ
-                Container(
-                  color: const Color.fromARGB(57, 255, 255, 255),
-                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 40,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Align(
-                              alignment: Alignment.topLeft, // 上左寄りに配置
-                              child: Text(
-                                'ランキング',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.person,
+                        size: 30,
+                        color: const Color.fromARGB(255, 255, 152, 0),
                       ),
-                    ],
+                      onPressed: () {
+                        print('アカウントボタンが押されました');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AddFriend()),
+                        );
+                      },
+                    ),
                   ),
-                ),
-
-                // Center内のSingleChildScrollViewを以下のように修正
-Center(
-  child: SingleChildScrollView(
-    scrollDirection: Axis.horizontal, // スクロールの方向、水平
-    child: Row(
-      children: r_imageUrls.map((url) {
-        return GestureDetector(
-          onTap: () {
-            // 画像がタップされたときの処理
-            print('画像がタップされました: $url');
-            // 必要に応じて画面遷移などをここで行うことができます
-          },
-          child: Container(
-            width: 200,
-            height: 200,
-            margin: EdgeInsets.all(20), // マージンを調整１
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), // 角を丸くする
-              image: DecorationImage(
-                image: NetworkImage(url), // リストから画像のURLを取得
-                fit: BoxFit.cover,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.account_circle,
+                        size: 30,
+                        color: const Color.fromRGBO(255, 255, 152, 0),
+                      ),
+                      onPressed: () {
+                        if (login) {
+                          print('アカウントボタンが押されました');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AccountProfile(),
+                            ),
+                          );
+                        } else {
+                          print('アカウントボタンが押されました');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        );
-      }).toList(), // mapをtoListでリストに変換
-    ),
-  ),
-),
 
-                // グループコンテナ
-                // あなたのお気に入りコンテナ
-                Container(
-                  color: const Color.fromARGB(57, 255, 255, 255),
-                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 30,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Align(
-                              alignment: Alignment.topLeft, // 上左寄りに配置
-                              child: Text(
-                                'グループ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
+            // ランキングコンテナ
+            Container(
+              color: const Color.fromARGB(57, 255, 255, 255),
+              width: MediaQuery.of(context).size.width,
+              height: 40,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'ランキング',
+                          style: TextStyle(
+                            fontSize: 20,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-
-                // グループコンテナ
-                Container(
-                  height: 300, // 高さを固定
-                  margin: EdgeInsets.all(8), // 各アイテムにマージンを追加
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // グリッドの列数
-                      crossAxisSpacing: 3, // グリッドの横方向のスペース
-                      mainAxisSpacing: 3, // グリッドの縦方向のスペース
                     ),
-                    itemCount: g_imageUrls.length, // グリッドに表示するアイテムの数
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          // 画像がタップされたときの処理
-                          print('画像がタップされました: ${g_imageUrls[index]}');
-                          // ここで別の画面に遷移することも可能
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10), // 各アイテムのマージン
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(10), // ボーダー半径の設定
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  g_imageUrls[index]), // リストから画像のURLを取得
-                              fit: BoxFit.cover, // 画像をコンテナにフィットさせる
-                            ),
-                          ),
-                        ),
-                      );
-                    },
                   ),
-                ),
+                ],
+              ),
+            ),
 
-                // あなたのお気に入りコンテナ
-                Container(
-                  color: const Color.fromARGB(112, 255, 255, 255),
-                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 30,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Align(
-                              alignment: Alignment.topLeft, // 上左寄りに配置
-                              child: Text(
-                                'あなたのお気に入り',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
+            // ランキング画像
+            Center(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: r_imageUrls.map((url) {
+                    return GestureDetector(
+                      onTap: () {
+                        print('画像がタップされました: $url');
+                      },
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        margin: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: NetworkImage(url),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    );
+                  }).toList(),
                 ),
+              ),
+            ),
 
-                // グループコンテナ
-                Container(
-                  height: 300, // 高さを固定
-                  margin: EdgeInsets.all(8), // 各アイテムにマージンを追加
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // グリッドの列数
-                      crossAxisSpacing: 3, // グリッドの横方向のスペース
-                      mainAxisSpacing: 3, // グリッドの縦方向のスペース
+            // グループコンテナ
+            Container(
+              color: const Color.fromARGB(57, 255, 255, 255),
+              width: MediaQuery.of(context).size.width,
+              height: 30,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'グループ',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
                     ),
-                    itemCount: f_imageUrls.length, // グリッドに表示するアイテムの数
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          // 画像がタップされたときの処理
-                          print('画像がタップされました: ${g_imageUrls[index]}');
-                          // ここで別の画面に遷移することも可能
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(10), // 各アイテムのマージン
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(10), // ボーダー半径の設定
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                  f_imageUrls[index]), // リストから画像のURLを取得
-                              fit: BoxFit.cover, // 画像をコンテナにフィットさせる
-                            ),
-                          ),
-                        ),
-                      );
-                    },
                   ),
-                ),
+                ],
+              ),
+            ),
 
-                //////////ログイン画面テスト用//////////
-                Container(
-                  width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-                  height: 100, // 高さ
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Text(
-                              'ログイン画面へ(仮)',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16.0),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.account_circle,
-                            size: 30,
-                            color: const Color.fromRGBO(236, 212, 29, 1),
-                          ),
-                          onPressed: () {
-                            print('アカウントボタンが押されました');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    builder: (context) => Login()));
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+            // グループ画像
+            Container(
+              height: 300,
+              margin: EdgeInsets.all(8),
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 3,
+                  mainAxisSpacing: 3,
                 ),
-                //////////ここまで//////////
-              ],
-            );
-          },
+                itemCount: g_imageUrls.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      print('画像がタップされました: ${g_imageUrls[index]}');
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(g_imageUrls[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // あなたのお気に入りコンテナ
+            Container(
+              color: const Color.fromARGB(112, 255, 255, 255),
+              width: MediaQuery.of(context).size.width,
+              height: 30,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'あなたのお気に入り',
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // お気に入り画像
+            Container(
+              height: 300,
+              margin: EdgeInsets.all(8),
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 3,
+                  mainAxisSpacing: 3,
+                ),
+                itemCount: f_imageUrls.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      print('画像がタップされました: ${f_imageUrls[index]}');
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(f_imageUrls[index]),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
-    ),
-  ));
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'ホーム',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'お気に入り',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.group),
+            label: 'グループ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'アカウント',
+          ),
+        ],
+        currentIndex: _currentIndex, // 現在選択されているインデックス
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index; // タップされたインデックスを設定
+          });
+          // タップされたインデックスに応じてナビゲーションを行うことも可能
+          switch (index) {
+            case 0:
+              // ホーム画面の処理
+              break;
+            case 1:
+              // お気に入り画面の処理
+              break;
+            case 2:
+              // グループ画面の処理
+              break;
+            case 3:
+              // アカウント画面の処理
+              if (login) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AccountProfile()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              }
+              break;
+          }
+        },
+      ),
+    );
+  }
 }
