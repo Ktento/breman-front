@@ -1,9 +1,11 @@
+import 'package:bremen_fe/favorite_song.dart';
 import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
+import 'favorite_song.dart';
 
 bool login = false;
 
@@ -374,6 +376,10 @@ class _MyHomePageState extends State<MyHomePage> {
               break;
             case 1:
               // お気に入り画面の処理
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FavoriteSong()),
+              );
               break;
             case 2:
               // グループ画面の処理
