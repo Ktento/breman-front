@@ -1,17 +1,14 @@
-import 'package:bremen_fe/account_profile.dart';
 import 'package:flutter/material.dart';
+import 'profile_edit.dart';
 import 'main.dart';
-import 'login.dart';
-import 'login.dart' as global;
-import 'song_search.dart';
 
-class ProfileEdit extends StatefulWidget {
+class SongSearch extends StatefulWidget {
   @override
-  _ProfileEditState createState() => _ProfileEditState();
+  _SongSearchState createState() => _SongSearchState();
 }
 
-class _ProfileEditState extends State<ProfileEdit> {
-  int _currentIndex = 3; // 現在のインデックスをアカウントプロフィールに設定
+class _SongSearchState extends State<SongSearch> {
+  int _currentIndex = 2; // 現在のインデックスをアカウントプロフィールに設定
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'プロフィール編集',
+                    '検索',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -43,64 +40,17 @@ class _ProfileEditState extends State<ProfileEdit> {
 
             // その他のコンテンツをここに追加
             Container(
-              width: 200,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50), //丸み具合を調整
-                child: Image.asset('images/image.png'),
+              padding: const EdgeInsets.all(16.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    )),
               ),
             ),
 
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: '名前:' + user_name,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'ユーザID:' + user_id,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              color: const Color.fromARGB(119, 255, 255, 255),
-              width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-              height: 70, // 高さ
-              alignment: Alignment.center, // ボタンを中央に配置
-              child: SizedBox(
-                width: 250, // ボタンの幅
-                height: 30, // ボタンの高さ
-                child: ElevatedButton(
-                  child: const Text('編集を保存'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange, // 背景色
-                    foregroundColor: Colors.white, // 文字色
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5), // 角の丸みを調整
-                    ),
-                  ),
-                  onPressed: () {
-                    print('アカウントボタンが押されました');
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        //（2） 実際に表示するページ(ウィジェット)を指定する
-                        builder: (context) => AccountProfile(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+            Container(),
           ],
         ),
       ),
@@ -146,11 +96,6 @@ class _ProfileEditState extends State<ProfileEdit> {
               break;
             case 2:
               // グループ画面の処理
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => SongSearch()),
-                (Route<dynamic> route) => false,
-              );
               break;
             case 3:
               // アカウント画面の処理は不要
