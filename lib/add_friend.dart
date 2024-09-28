@@ -23,32 +23,26 @@ class AddFriend extends StatelessWidget {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'ログイン',
+                    'フレンド追加',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
 
-            // その他のコンテンツをここに追加
+
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'メールアドレス'), //メアド入力フォーム
+                    border: InputBorder.none, hintText: 'ユーザID'), //メアド入力フォーム
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'パスワード'), //パスワード入力フォーム
-              ),
-            ),
+
             Container(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                child: const Text('ログイン'),
+                child: const Text('フレンド追加'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
@@ -57,23 +51,6 @@ class AddFriend extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {}, //ログインボタンを押したときの処理
-              ),
-            ),
-            Container(
-              // Flutter1.22以降のみ
-              child: TextButton(
-                child: const Text('アカウント作成'),
-                style: TextButton.styleFrom(
-                  foregroundColor: Colors.orange,
-                ),
-                onPressed: () {
-                  print('ログインボタンが押されました');
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          // （2） 実際に表示するページ(ウィジェット)を指定する
-                          builder: (context) => NewAccount()));
-                },
               ),
             ),
           ],

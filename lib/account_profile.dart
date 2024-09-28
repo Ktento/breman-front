@@ -59,6 +59,7 @@ class _AccountProfileState extends State<AccountProfile> {
                   ),
                   onPressed: () {
                     print('アカウントボタンが押されました');
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -66,6 +67,7 @@ class _AccountProfileState extends State<AccountProfile> {
                         builder: (context) => ProfileEdit(),
                       ),
                     );
+
                   },
                 ),
               ),
