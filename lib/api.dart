@@ -93,10 +93,12 @@ class ApiService {
       if (response.statusCode == 201) {
         // JSONをデコードしてマップ形式に変換
         final Map<String, dynamic> data = json.decode(response.body);
-        int id = data['user']['id'];
-        String user_id = data['user']['user_id'];
-        String user_name = data['user']['user_name'];
-        return [response.statusCode, id, user_id, user_name];
+        return [
+          response.statusCode,
+          data['id'],
+          data['user_id'],
+          data['user_name']
+        ];
       } else {
         print('新規登録失敗: ${response.statusCode}');
         //失敗した場合はstatusCodeを返す

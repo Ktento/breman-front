@@ -109,8 +109,6 @@ class _NewAccountState extends State<NewAccount> {
 
                   // APIサービスを使用してログイン処理を実行
                   try {
-                    print('aaaaaaaaaaaaaaaaaaaaaaaaaaa');
-                    
                     List response = await _apiService.SignUp(
                         userId, userName, password, _passwordConfirmation);
                     //response[0]->response.statusCode
@@ -118,11 +116,8 @@ class _NewAccountState extends State<NewAccount> {
                     //response[2]->user_id(自分で決めるuser_id)
                     //response[3]->user_name(名前)
 
-                    print('サインインリクエストを送信しました');
-                    print(response[1]);
-
                     //変数に格納
-                    String statusCode = response[0];
+                    int statusCode = response[0];
                     id = response[1];
                     user_id = response[2];
                     user_name = response[3];
