@@ -49,7 +49,7 @@ class SongDetailScreen extends StatelessWidget {
             if (song.containsKey('youtubeUrl') && song['youtubeUrl'] != null)
               ElevatedButton.icon(
                 onPressed: () {
-                  _launchURL('https://www.youtube.com/watch?v=ZRtdQ81jPUQ');
+                  _launchURL(song['youtubeUrl']);
                 },
                 icon: Icon(Icons.play_circle_filled),
                 label: Text('YouTubeで見る'),
