@@ -75,6 +75,10 @@ class _AddGroupState extends State<AddGroup> {
                   String groupName = _groupNameController.text;
                   // グループ名を使った処理
                   print("グループ名: $groupName");  //groupNameにグループ名を格納
+
+                  //----API実装して、グループを追加----//
+
+                  
                 },
               ),
             ),

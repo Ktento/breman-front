@@ -11,6 +11,13 @@ class SongSearch extends StatefulWidget {
 
 class _SongSearchState extends State<SongSearch> {
   int _currentIndex = 2; // 現在のインデックスをアカウントプロフィールに設定
+  final TextEditingController _searchController = TextEditingController(); // TextEditingControllerの追加
+
+  @override
+  void dispose() {
+    _searchController.dispose(); // メモリリークを防ぐためにコントローラを破棄
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +51,7 @@ class _SongSearchState extends State<SongSearch> {
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextFormField(
+                controller: _searchController, // コントローラをTextFormFieldに割り当て
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
                     border: OutlineInputBorder(
@@ -51,8 +59,16 @@ class _SongSearchState extends State<SongSearch> {
                     )),
               ),
             ),
+            
+            ElevatedButton(
+              onPressed: () {
+                String searchText = _searchController.text; // 入力内容を取得
+                print("検索ワード: $searchText"); // 検索ワードをコンソールに表示
 
-            Container(),
+                //---APIを実装し、曲の検索結果を返す---//
+              },
+              child: Text('検索'),
+            ),
           ],
         ),
       ),

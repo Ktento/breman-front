@@ -36,6 +36,7 @@ class AddFriend extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                     border: InputBorder.none, hintText: 'ユーザID'), //メアド入力フォーム
+                    //入力値を受け取りたい
               ),
             ),
 
@@ -50,7 +51,11 @@ class AddFriend extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15), // 角の丸みを調整
                   ),
                 ),
-                onPressed: () {}, //ログインボタンを押したときの処理
+                onPressed: () {
+
+                  //----API実装して、フレ申送信----//
+
+                }, //ログインボタンを押したときの処理
               ),
             ),
           ],

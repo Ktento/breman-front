@@ -24,7 +24,8 @@ class _GroupViewState extends State<GroupView> {
       'title': 'Song Title 2',
       'image': 'images/image.png',
     },
-    // 他の曲も追加できます
+    // APIで情報を取得して、上の配列に格納
+    //とってくる情報は変えてもいいお
   ];
 
   @override
