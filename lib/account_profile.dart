@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'profile_edit.dart';
 import 'main.dart';
+import 'login.dart';
+import 'login.dart' as global;
 
 class AccountProfile extends StatefulWidget {
   @override
@@ -67,7 +69,6 @@ class _AccountProfileState extends State<AccountProfile> {
                         builder: (context) => ProfileEdit(),
                       ),
                     );
-
                   },
                 ),
               ),
@@ -82,7 +83,47 @@ class _AccountProfileState extends State<AccountProfile> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: Text(
-                          '名前',
+                          '名前:' + user_name,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+             Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'ユーザID:' + user_id,
+                          style: TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+             Container(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          '名前:' + user_name,
                           style: TextStyle(
                             fontSize: 15,
                           ),
