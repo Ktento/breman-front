@@ -46,7 +46,9 @@ class _SongSearchState extends State<SongSearch> {
               child: TextFormField(
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(30.0),)),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    )),
               ),
             ),
 
@@ -110,6 +112,7 @@ class _SongSearchState extends State<SongSearch> {
                   MaterialPageRoute(builder: (context) => Login()),
                 );
               }
+
               break;
           }
         },

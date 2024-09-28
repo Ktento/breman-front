@@ -4,8 +4,9 @@ import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
+import 'group_view.dart';
 
-bool login = true;
+bool login = false;
 
 // ランキング画像のURLリスト
 final List<String> r_imageUrls = [
@@ -37,9 +38,15 @@ final List<String> f_imageUrls = [
 
 // メイン関数
 void main() {
-  runApp(MaterialApp(
-    home: MyHomePage(),
-  ));
+  if (login == true) {
+    runApp(MaterialApp(
+      home: MyHomePage(),
+    ));
+  } else {
+    runApp(MaterialApp(
+      home: Login(),
+    ));
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -221,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 context,
                                 MaterialPageRoute(
                                     // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    builder: (context) => RankingList()));
+                                    builder: (context) => GroupView()));
                           },
                         ),
                       ),
