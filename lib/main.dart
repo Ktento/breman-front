@@ -1,3 +1,10 @@
+// // デバックするときは以下の文にする
+// import 'debug.dart';
+
+// void main() async {
+//   await debugApiService(); // debug.dartの関数を呼び出す
+// }
+
 import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
