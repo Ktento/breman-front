@@ -323,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             _currentIndex = index; // タップされたインデックスを設定
           });
-          // タップされたインデックスに応じてナビゲーションを行うことも可能
+          // タップされたインデックスに応じてナビゲーションを行う
           switch (index) {
             case 0:
               // ホーム画面の処理
