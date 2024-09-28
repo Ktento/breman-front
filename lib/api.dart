@@ -142,4 +142,36 @@ class ApiService {
       return [];
     }
   }
+
+  //曲検索のリクエスト
+  Future<List<dynamic>> TrackSearch(String track_name) async {
+    final url = Uri.parse(
+        '$_baseUrl/track/search?track_name=$track_name'); // クエリパラメータをURLに追加
+    try {
+      final response = await http.get(url);
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換 ----------------------------------<
+        final Map<String, dynamic> data = json.decode(response.body);
+        // if (data['track'] != null) {
+        //   int id = data['user']['id'];
+        //   String user_id = data['user']['user_id'];
+        //   String user_name = data['user']['user_name'];
+        //   return [id, user_id, user_name];
+        } else {
+          print('userオブジェクトがnullです。レスポンスデータ: $data');
+          return [];
+        }
+      } else {
+        print('検索失敗: ${response.statusCode}');
+        //失敗した場合はstatusCodeを返す
+        return [response.statusCode];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
 }
