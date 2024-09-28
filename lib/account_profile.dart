@@ -1,6 +1,10 @@
+import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'profile_edit.dart';
 import 'main.dart';
+import 'login.dart';
+import 'login.dart' as global;
+import 'song_search.dart';
 
 class AccountProfile extends StatefulWidget {
   @override
@@ -40,10 +44,18 @@ class _AccountProfileState extends State<AccountProfile> {
 
             // その他のコンテンツをここに追加
             Container(
-              padding: const EdgeInsets.all(16.0),
-              color: const Color.fromARGB(119, 0, 0, 0),
+              width: 200,
+              height: 200,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50), //丸み具合を調整
+                child: Image.asset('images/image.png'),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+              color: const Color.fromARGB(119, 255, 255, 255),
               width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-              height: 250, // 高さ
+              height: 60, // 高さ
               alignment: Alignment.center, // ボタンを中央に配置
               child: SizedBox(
                 width: 250, // ボタンの幅
@@ -67,13 +79,13 @@ class _AccountProfileState extends State<AccountProfile> {
                         builder: (context) => ProfileEdit(),
                       ),
                     );
-
                   },
                 ),
               ),
             ),
 
             Container(
+              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
               child: Row(
                 children: [
                   Expanded(
@@ -82,9 +94,30 @@ class _AccountProfileState extends State<AccountProfile> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
                         child: Text(
-                          '名前',
+                          '名前:　　' + user_name,
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Text(
+                          'ユーザID: ' + user_id,
+                          style: TextStyle(
+                            fontSize: 20,
                           ),
                         ),
                       ),
@@ -110,8 +143,8 @@ class _AccountProfileState extends State<AccountProfile> {
             label: 'お気に入り',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'グループ',
+            icon: Icon(Icons.search),
+            label: '検索',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -138,6 +171,11 @@ class _AccountProfileState extends State<AccountProfile> {
               break;
             case 2:
               // グループ画面の処理
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SongSearch()),
+                (Route<dynamic> route) => false,
+              );
               break;
             case 3:
               // アカウント画面の処理は不要

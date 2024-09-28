@@ -1,10 +1,11 @@
+import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
 
-bool login = true;
+bool login = false;
 
 // ランキング画像のURLリスト
 final List<String> r_imageUrls = [
@@ -36,9 +37,15 @@ final List<String> f_imageUrls = [
 
 // メイン関数
 void main() {
-  runApp(MaterialApp(
-    home: MyHomePage(),
-  ));
+  if (login == true) {
+    runApp(MaterialApp(
+      home: MyHomePage(),
+    ));
+  } else {
+    runApp(MaterialApp(
+      home: Login(),
+    ));
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -140,25 +147,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: ElevatedButton(
+                        child: TextButton(
                           child: const Text('ランキング'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.orange, // 背景色
-                            foregroundColor: Colors.white, // 文字色
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5), // 角の丸みを調整
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(40, 50), // 幅200、高さ50のボタン
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 20, // フォントサイズを20に設定
                             ),
                           ),
                           onPressed: () {
-                            print('アカウントボタンが押されました');
-
+                            print('アカウント新規作成が押されました');
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                //（2） 実際に表示するページ(ウィジェット)を指定する
-                                builder: (context) => RankingList(),
-                              ),
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => RankingList()));
                           },
                         ),
                       ),
@@ -200,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               color: const Color.fromARGB(57, 255, 255, 255),
               width: MediaQuery.of(context).size.width,
-              height: 30,
+              height: 40,
               child: Row(
                 children: [
                   Expanded(
@@ -208,11 +212,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'グループ',
-                          style: TextStyle(
-                            fontSize: 20,
+                        child: TextButton(
+                          child: const Text('グループ'),
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(40, 30), // 幅200、高さ50のボタン
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 20, // フォントサイズを20に設定
+                            ),
                           ),
+                          onPressed: () {
+                            print('アカウント新規作成が押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => RankingList()));
+                          },
                         ),
                       ),
                     ),
@@ -255,9 +271,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // あなたのお気に入りコンテナ
             Container(
-              color: const Color.fromARGB(112, 255, 255, 255),
+              color: const Color.fromARGB(110, 255, 255, 255),
               width: MediaQuery.of(context).size.width,
-              height: 30,
+              height: 40,
               child: Row(
                 children: [
                   Expanded(
@@ -265,11 +281,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'あなたのお気に入り',
-                          style: TextStyle(
-                            fontSize: 20,
+                        child: TextButton(
+                          child: const Text('あなたのお気に入り'),
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(40, 30), // 幅200、高さ50のボタン
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 20, // フォントサイズを20に設定
+                            ),
                           ),
+                          onPressed: () {
+                            print('アカウント新規作成が押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => RankingList()));
+                          },
                         ),
                       ),
                     ),
@@ -326,8 +354,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'お気に入り',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'グループ',
+            icon: Icon(Icons.search),
+            label: '検索',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -349,6 +377,10 @@ class _MyHomePageState extends State<MyHomePage> {
               break;
             case 2:
               // グループ画面の処理
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SongSearch()),
+              );
               break;
             case 3:
               // アカウント画面の処理
