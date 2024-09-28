@@ -141,8 +141,8 @@ class _AccountProfileState extends State<AccountProfile> {
             label: 'お気に入り',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'グループ',
+            icon: Icon(Icons.search),
+            label: '検索',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
