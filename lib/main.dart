@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
+//import 'ranking-list.dart';
 
 bool login = true;
 
@@ -139,11 +140,26 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'ランキング',
-                          style: TextStyle(
-                            fontSize: 20,
+                        child: ElevatedButton(
+                          child: const Text('アカウント情報を編集'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.orange, // 背景色
+                            foregroundColor: Colors.white, // 文字色
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5), // 角の丸みを調整
+                            ),
                           ),
+                          onPressed: () {
+                            print('アカウントボタンが押されました');
+
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                //（2） 実際に表示するページ(ウィジェット)を指定する
+                                builder: (context) => ProfileEdit(),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
