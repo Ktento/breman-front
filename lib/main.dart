@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
-//import 'ranking-list.dart';
+import 'ranking-list.dart';
 
 bool login = true;
 
@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               context,
                               MaterialPageRoute(
                                 //（2） 実際に表示するページ(ウィジェット)を指定する
-                                builder: (context) => ProfileEdit(),
+                                builder: (context) => RankingList(),
                               ),
                             );
                           },
