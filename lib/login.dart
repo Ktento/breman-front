@@ -2,7 +2,7 @@ import 'package:bremen_fe/new_account.dart';
 import 'package:flutter/material.dart';
 import 'new_account.dart';
 import 'main.dart';
-import 'main.dart' as global;
+// import 'main.dart' as global;
 import 'api.dart';
 
 //グローバル変数
