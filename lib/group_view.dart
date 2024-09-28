@@ -73,7 +73,7 @@ class _GroupViewState extends State<GroupView> {
 
             // グループリスト
             Container(
-              color: const Color.fromARGB(158, 233, 78, 78),
+              color: const Color.fromARGB(158, 255, 255, 255),
               width: MediaQuery.of(context).size.width,
               height: 400,
               child: ListView.builder(
