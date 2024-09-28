@@ -56,7 +56,7 @@ class ApiService {
   }
 
   //ユーザ新規登録のPOSTリクエスト
-  Future<List<dynamic>> SingUp(
+  Future<List<dynamic>> SignUp(
     String user_id,
     String user_name,
     String password,
