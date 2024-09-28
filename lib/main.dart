@@ -3,7 +3,7 @@ import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 
-bool login = true;
+bool login = false;
 
 // ランキング画像のURLリスト
 final List<String> r_imageUrls = [
