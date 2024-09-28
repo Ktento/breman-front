@@ -1,7 +1,9 @@
-import 'package:bremen_fe/new_account.dart';
 import 'package:flutter/material.dart';
 
 class AddFriend extends StatelessWidget {
+  // TextEditingControllerを定義
+  final TextEditingController _userIdController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +13,7 @@ class AddFriend extends StatelessWidget {
           children: [
             // 戻るボタンを含むコンテナ
             Container(
-              padding: EdgeInsets.only(top: 20, left: 16, right: 16), // 上部余白を調整
+              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -21,7 +23,7 @@ class AddFriend extends StatelessWidget {
                       Navigator.pop(context); // 前の画面に戻る
                     },
                   ),
-                  SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
+                  SizedBox(width: 8),
                   Text(
                     'フレンド追加',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -30,15 +32,19 @@ class AddFriend extends StatelessWidget {
               ),
             ),
 
-
+            // ユーザID入力フォーム
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                controller: _userIdController, // TextEditingControllerをTextFieldに接続
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'ユーザID'), //メアド入力フォーム
+                  border: InputBorder.none,
+                  hintText: 'ユーザID',
+                ),
               ),
             ),
 
+            // フレンド追加ボタン
             Container(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
@@ -47,10 +53,16 @@ class AddFriend extends StatelessWidget {
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15), // 角の丸みを調整
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                onPressed: () {}, //ログインボタンを押したときの処理
+                onPressed: () {
+                  // TextFieldの内容を取得
+                  String userId = _userIdController.text;
+                  print('ユーザID: $userId');
+          
+                  // ここにフレンド追加のロジックを追加
+                },
               ),
             ),
           ],
