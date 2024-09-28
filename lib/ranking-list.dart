@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'profile_edit.dart';
 import 'main.dart';
 
 class RankingList extends StatefulWidget {
@@ -8,122 +7,72 @@ class RankingList extends StatefulWidget {
 }
 
 class _RankingListState extends State<RankingList> {
-  int _currentIndex = 3; // 現在のインデックスをアカウントプロフィールに設定
+  int _currentIndex = 3;
+
+  // 音楽ランキングのダミーデータ
+  final List<Map<String, dynamic>> _musicRanking = [
+    {'rank': 1, 'title': 'Song A', 'artist': 'Artist X', 'lastWeek': 2},
+    {'rank': 2, 'title': 'Song B', 'artist': 'Artist Y', 'lastWeek': 1},
+    {'rank': 3, 'title': 'Song C', 'artist': 'Artist Z', 'lastWeek': 5},
+    {'rank': 4, 'title': 'Song D', 'artist': 'Artist W', 'lastWeek': 3},
+    {'rank': 5, 'title': 'Song E', 'artist': 'Artist V', 'lastWeek': 4},
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // 戻るボタンを含むコンテナ
-            Container(
-              padding: EdgeInsets.only(top: 20, left: 16, right: 16), // 上部余白を調整
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+      appBar: AppBar(
+        title: Text('音楽ランキング'),
+        backgroundColor: Colors.orange,
+      ),
+      body: ListView.builder(
+        itemCount: _musicRanking.length,
+        itemBuilder: (context, index) {
+          final item = _musicRanking[index];
+          return Card(
+            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Text('${item['rank']}',
+                    style: TextStyle(color: Colors.white)),
+              ),
+              title: Text(item['title'],
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              subtitle: Text(item['artist']),
+              trailing: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back, size: 30),
-                    onPressed: () {
-                      Navigator.pop(context); // 前の画面に戻る
-                    },
-                  ),
-                  SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
-                  Text(
-                    'ランキング',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  Text('前週: ${item['lastWeek']}位'),
+                  Icon(
+                    item['lastWeek'] > item['rank']
+                        ? Icons.arrow_upward
+                        : Icons.arrow_downward,
+                    color: item['lastWeek'] > item['rank']
+                        ? Colors.green
+                        : Colors.red,
                   ),
                 ],
               ),
             ),
-
-            // その他のコンテンツをここに追加
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              color: const Color.fromARGB(119, 0, 0, 0),
-              width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-              height: 250, // 高さ
-              alignment: Alignment.center, // ボタンを中央に配置
-              child: SizedBox(
-                width: 250, // ボタンの幅
-                height: 30, // ボタンの高さ
-                child: ElevatedButton(
-                  child: const Text('アカウント情報を編集'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange, // 背景色
-                    foregroundColor: Colors.white, // 文字色
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5), // 角の丸みを調整
-                    ),
-                  ),
-                  onPressed: () {
-                    print('アカウントボタンが押されました');
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        //（2） 実際に表示するページ(ウィジェット)を指定する
-                        builder: (context) => ProfileEdit(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            Container(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          '名前',
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         selectedItemColor: Colors.orange,
         unselectedItemColor: Colors.grey,
         items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'ホーム',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'お気に入り',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.group),
-            label: 'グループ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'アカウント',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'お気に入り'),
+          BottomNavigationBarItem(icon: Icon(Icons.group), label: 'グループ'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'アカウント'),
         ],
-        currentIndex: _currentIndex, // 現在選択されているインデックス
+        currentIndex: _currentIndex,
         onTap: (index) {
-          // タップされたインデックスに応じてナビゲーションを行う
-          setState(() {
-            _currentIndex = index; // タップされたインデックスを更新
-          });
-
+        
           switch (index) {
             case 0:
               Navigator.pushAndRemoveUntil(
@@ -139,7 +88,7 @@ class _RankingListState extends State<RankingList> {
               // グループ画面の処理
               break;
             case 3:
-              // アカウント画面の処理は不要
+              // アカウント画面の処理
               break;
           }
         },
