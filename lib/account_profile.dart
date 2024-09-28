@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'profile_edit.dart';
 import 'main.dart';
 import 'login.dart';
-import 'login.dart' as global;
+// import 'login.dart' as global;
 import 'song_search.dart';
 
 class AccountProfile extends StatefulWidget {

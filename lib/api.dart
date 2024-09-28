@@ -64,6 +64,11 @@ class ApiService {
   ) async {
     final url = Uri.parse('$_baseUrl/users/signup'); // クエリパラメータをURLに追加
     try {
+      print(user_name);
+      print(user_id);
+      print(password);
+      print(password_confirmation);
+
       //http.get ->getリクエスト
       //http.post ->postリクエスト
       //http.put ->putリクエスト
@@ -75,10 +80,12 @@ class ApiService {
           'Content-Type': 'application/json', // ヘッダーの設定
         },
         body: json.encode({
-          'user_id': user_id,
-          'user_name': user_name,
-          'password': password,
-          'password_confirmation': password_confirmation
+          'user': {
+            'user_id': user_id,
+            'user_name': user_name,
+            'password': password,
+            'password_confirmation': password_confirmation
+          }
         }),
       );
       //レスポンス確認用のprint
@@ -86,15 +93,10 @@ class ApiService {
       if (response.statusCode == 201) {
         // JSONをデコードしてマップ形式に変換
         final Map<String, dynamic> data = json.decode(response.body);
-        if (data['user'] != null) {
-          int id = data['user']['id'];
-          String user_id = data['user']['user_id'];
-          String user_name = data['user']['user_name'];
-          return [id, user_id, user_name];
-        } else {
-          print('userオブジェクトがnullです。レスポンスデータ: $data');
-          return [];
-        }
+        int id = data['user']['id'];
+        String user_id = data['user']['user_id'];
+        String user_name = data['user']['user_name'];
+        return [response.statusCode, id, user_id, user_name];
       } else {
         print('新規登録失敗: ${response.statusCode}');
         //失敗した場合はstatusCodeを返す

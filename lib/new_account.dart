@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'api.dart';
+import 'main.dart';
+// import 'main.dart' as global;
 
-class NewAccount extends StatelessWidget {
+class NewAccount extends StatefulWidget {
+  @override
+  _NewAccountState createState() => _NewAccountState();
+}
+
+class _NewAccountState extends State<NewAccount> {
+  final TextEditingController _userIdController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmationController =
+      TextEditingController();
+  final ApiService _apiService = ApiService(); // ApiServiceのインスタンス
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +49,7 @@ class NewAccount extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                controller: _userIdController, // ここを追加
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'ユーザID', // メアド入力フォーム
@@ -44,6 +60,7 @@ class NewAccount extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                controller: _userNameController, // ここを追加
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'ユーザ名', // メアド入力フォーム
@@ -53,6 +70,7 @@ class NewAccount extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                controller: _passwordController, // ここを追加
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'パスワード', // メアド入力フォーム
@@ -62,6 +80,7 @@ class NewAccount extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                controller: _passwordConfirmationController, // ここを追加
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   hintText: 'パスワード(確認用)', // メアド入力フォーム
@@ -80,7 +99,44 @@ class NewAccount extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15), // 角の丸みを調整
                   ),
                 ),
-                onPressed: () {}, //ログインボタンを押したときの処理
+                onPressed: () async {
+                  //新規登録ボタンを押したときの処理
+                  final userId = _userIdController.text;
+                  final userName = _userNameController.text;
+                  final password = _passwordController.text;
+                  final _passwordConfirmation =
+                      _passwordConfirmationController.text;
+
+                  // APIサービスを使用してログイン処理を実行
+                  try {
+                    print('aaaaaaaaaaaaaaaaaaaaaaaaaaa');
+                    
+                    List response = await _apiService.SignUp(
+                        userId, userName, password, _passwordConfirmation);
+                    //response[0]->response.statusCode
+                    //response[1]->id(userを登録するときに自動でつく主キー)
+                    //response[2]->user_id(自分で決めるuser_id)
+                    //response[3]->user_name(名前)
+
+                    print('サインインリクエストを送信しました');
+                    print(response[1]);
+
+                    //変数に格納
+                    String statusCode = response[0];
+                    id = response[1];
+                    user_id = response[2];
+                    user_name = response[3];
+
+                    //login状態をキープ
+                    login = true;
+
+                    //ホーム画面に自動遷移
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()));
+                  } catch (e) {
+                    print('ログイン中にエラーが発生しました: $e');
+                  }
+                },
               ),
             ),
             Container(
@@ -104,5 +160,14 @@ class NewAccount extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _userIdController.dispose();
+    _userNameController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmationController.dispose();
+    super.dispose();
   }
 }
