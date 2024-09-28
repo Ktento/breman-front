@@ -4,12 +4,12 @@ import 'main.dart';
 import 'login.dart';
 import 'login.dart' as global;
 
-class AccountProfile extends StatefulWidget {
+class ProfileEdit extends StatefulWidget {
   @override
-  _AccountProfileState createState() => _AccountProfileState();
+  _ProfileEditState createState() => _ProfileEditState();
 }
 
-class _AccountProfileState extends State<AccountProfile> {
+class _ProfileEditState extends State<ProfileEdit> {
   int _currentIndex = 3; // 現在のインデックスをアカウントプロフィールに設定
 
   @override
