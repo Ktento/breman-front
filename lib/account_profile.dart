@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'profile_edit.dart';
+import 'main.dart';
 
-class AccountProfile extends StatelessWidget {
+class AccountProfile extends StatefulWidget {
+  @override
+  _AccountProfileState createState() => _AccountProfileState();
+}
+
+class _AccountProfileState extends State<AccountProfile> {
+  int _currentIndex = 3; // 現在のインデックスをアカウントプロフィールに設定
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,11 +59,15 @@ class AccountProfile extends StatelessWidget {
                   ),
                   onPressed: () {
                     print('アカウントボタンが押されました');
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    builder: (context) => ProfileEdit()));
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        //（2） 実際に表示するページ(ウィジェット)を指定する
+                        builder: (context) => ProfileEdit(),
+                      ),
+                    );
+
                   },
                 ),
               ),
@@ -83,6 +95,55 @@ class AccountProfile extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'ホーム',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'お気に入り',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.group),
+            label: 'グループ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'アカウント',
+          ),
+        ],
+        currentIndex: _currentIndex, // 現在選択されているインデックス
+        onTap: (index) {
+          // タップされたインデックスに応じてナビゲーションを行う
+          setState(() {
+            _currentIndex = index; // タップされたインデックスを更新
+          });
+
+          switch (index) {
+            case 0:
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+                (Route<dynamic> route) => false,
+              );
+              break;
+            case 1:
+              // お気に入り画面の処理
+              break;
+            case 2:
+              // グループ画面の処理
+              break;
+            case 3:
+              // アカウント画面の処理は不要
+              break;
+          }
+        },
       ),
     );
   }
