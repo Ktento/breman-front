@@ -47,7 +47,7 @@ class _GroupViewState extends State<GroupView> {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'お気に入り',
+                    'グループ',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
