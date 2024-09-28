@@ -47,7 +47,7 @@ class _RankingListState extends State<RankingList> {
               title: Text(item['title'],
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(item['artist']),
-              onTap: () {
+              onTap: () { // onTapさんは画面遷移
                 Navigator.push(
                   context,
                   MaterialPageRoute(

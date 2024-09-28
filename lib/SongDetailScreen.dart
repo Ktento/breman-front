@@ -8,10 +8,9 @@ class SongDetailScreen extends StatelessWidget {
 
   // URLを開くための関数
   Future<void> _launchURL(String url) async {
-    if (url.isNotEmpty && await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+    final Uri _url = Uri.parse(url);
+    if (!await launchUrl(_url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $_url';
     }
   }
 
@@ -50,7 +49,7 @@ class SongDetailScreen extends StatelessWidget {
             if (song.containsKey('youtubeUrl') && song['youtubeUrl'] != null)
               ElevatedButton.icon(
                 onPressed: () {
-                  _launchURL('https://www.google.com');
+                  _launchURL('https://www.youtube.com/watch?v=ZRtdQ81jPUQ');
                 },
                 icon: Icon(Icons.play_circle_filled),
                 label: Text('YouTubeで見る'),
