@@ -5,34 +5,49 @@ import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
 
-bool login = false;
+bool login = true;
 
-// ランキング画像のURLリスト
-final List<String> r_imageUrls = [
-  'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://i.pinimg.com/236x/b8/44/62/b84462069b5784e0bf29d3ce1426925d.jpg',
-  'https://i.pinimg.com/236x/41/56/a6/4156a68baa1b6779860a3ab33d1acfda.jpg',
-  'https://i.pinimg.com/236x/9c/90/59/9c9059cb64d005cd1cb0fdbdf3cbdfde.jpg',
+final List<Map<String, dynamic>> r_imageUrls = [
+  {
+    'id': 'song1', // 楽曲ID
+    'title': 'Song Title 1',
+    'url': 'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
+  },
+  {
+    'id': 'song2', // 楽曲ID
+    'title': 'Song Title 2',
+    'url': 'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
+  },
+  // 他の曲も追加できます
+];
+
+
+// グループ画像のURLリスト
+final List<Map<String, dynamic>> g_imageUrls = [
+ {
+    'id': 'song1', // 楽曲ID
+    'title': 'Song Title 1',
+    'url': 'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
+  },
+  {
+    'id': 'song2', // 楽曲ID
+    'title': 'Song Title 2',
+    'url': 'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
+  },
 ];
 
 // グループ画像のURLリスト
-final List<String> g_imageUrls = [
-  'https://i.pinimg.com/236x/37/f6/28/37f628fcafd4fd222cc3c3899948e84b.jpg',
-  'https://i.pinimg.com/474x/b4/0f/be/b40fbe8222a7a493db26b36ee8c1550a.jpg',
-  'https://i.pinimg.com/236x/a3/73/0f/a3730ff74e7832087740c2a128538f3f.jpg',
-  'https://i.pinimg.com/236x/94/a3/ae/94a3ae1dda96ad0c71d6a396856b2025.jpg',
-  'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg',
-  'https://i.pinimg.com/236x/de/67/54/de67546f2a3cfedae325399aa55fedef.jpg',
-];
-
-// グループ画像のURLリスト
-final List<String> f_imageUrls = [
-  'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg',
-  'https://i.pinimg.com/236x/f8/0c/4c/f80c4c91f707605b2dbb8bf412316ca5.jpg',
-  'https://i.pinimg.com/236x/ec/1b/ef/ec1befcde4d75fbb9ec6146ac4a2fb1c.jpg',
-  'https://i.pinimg.com/236x/8c/b1/f7/8cb1f773d581ff99bede558d0eb758ba.jpg',
-  'https://i.pinimg.com/736x/68/26/d5/6826d5f7d9535605cdca6d648dae66c0.jpg',
-  'https://i.pinimg.com/236x/a3/73/0f/a3730ff74e7832087740c2a128538f3f.jpg',
+final List<Map<String, dynamic>> f_imageUrls = [
+ {
+    'id': 'song1', // 楽曲ID
+    'title': 'Song Title 1',
+    'url': 'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
+  },
+  {
+    'id': 'song2', // 楽曲ID
+    'title': 'Song Title 2',
+    'url': 'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
+  },
 ];
 
 // メイン関数
@@ -177,10 +192,10 @@ class _MyHomePageState extends State<MyHomePage> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: r_imageUrls.map((url) {
+                  children: r_imageUrls.map((song) {
                     return GestureDetector(
                       onTap: () {
-                        print('画像がタップされました: $url');
+                        print('画像がタップされました: ${song['url']}'); // urlを表示
                       },
                       child: Container(
                         width: 200,
@@ -189,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: NetworkImage(url),
+                            image: NetworkImage(song['url']),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -259,7 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(g_imageUrls[index]),
+                          image: NetworkImage(g_imageUrls[index]['url']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -328,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
-                          image: NetworkImage(f_imageUrls[index]),
+                          image: NetworkImage(f_imageUrls[index]['url']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -374,6 +389,10 @@ class _MyHomePageState extends State<MyHomePage> {
               break;
             case 1:
               // お気に入り画面の処理
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SongSearch()),
+              );
               break;
             case 2:
               // グループ画面の処理
