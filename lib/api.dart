@@ -33,6 +33,26 @@ class ApiService {
       // print(response.body);
       if (response.statusCode == 200) {
         // JSONをデコードしてマップ形式に変換
+        //レスポンスの始まりのかっこによって型が変わる
+        //レスポンスが以下の場合([]なのでList) -> List<dynamic>
+        /*
+        [
+          {
+            "id": 10,
+            "user_id": "test",
+            "user_name": "test"
+          }
+        ]*/
+        //レスポンスが以下の場合({}なのでMap) -> Map<String, dynamic>
+        /*
+          {
+            "id": 1,
+            "user_id": "test",
+            "user_name": "test",
+            "password_digest": "test",
+          }
+        */
+
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['user'] != null) {
           int id = data['user']['id'];
@@ -113,28 +133,71 @@ class ApiService {
 
   //ユーザ検索のGETリクエスト
   Future<List<dynamic>> UserSearch(String user_id) async {
-    final url = Uri.parse(
-        '$_baseUrl/users/search?search_user_id=$user_id'); // クエリパラメータをURLに追加
+    final url = Uri.parse('$_baseUrl/users/search?search_user_id=$user_id');
     try {
       final response = await http.get(url);
-      //レスポンス確認用のprint
-      // print(response.body);
       if (response.statusCode == 200) {
-        // JSONをデコードしてマップ形式に変換
-        final Map<String, dynamic> data = json.decode(response.body);
-        if (data['user'] != null) {
-          int id = data['user']['id'];
-          String user_id = data['user']['user_id'];
-          String user_name = data['user']['user_name'];
+        final List<dynamic> data = json.decode(response.body);
+        if (data.isNotEmpty) {
+          int id = data[0]['id'];
+          String user_id = data[0]['user_id'];
+          String user_name = data[0]['user_name'];
           return [id, user_id, user_name];
         } else {
-          print('userオブジェクトがnullです。レスポンスデータ: $data');
+          print('レスポンスは空です。');
           return [];
         }
       } else {
         print('検索失敗: ${response.statusCode}');
-        //失敗した場合はstatusCodeを返す
         return [response.statusCode];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      return [];
+    }
+  }
+
+  //曲検索のリクエスト
+  //{response[0]["id"]}このようにすると1曲目のidを知れる
+  Future<List<dynamic>> TrackSearch(String track_name) async {
+    final url = Uri.parse(
+        '$_baseUrl/tracks/search?track_name=$track_name'); // クエリパラメータをURLに追加
+    try {
+      final response = await http.get(url);
+
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換 ----------------------------------<
+        final List<dynamic> data = json.decode(response.body);
+
+        // データを処理して、必要な情報をリストに格納
+        List<Map<String, dynamic>> trackList = [];
+
+        for (var track in data) {
+          String trackId = track['id'];
+          String trackName = track['track_name'];
+          String imageUrl = track['image_url'];
+
+          // アーティスト情報をすべて取得
+          List<String> artistNames = [];
+          for (var artist in track['artists']) {
+            artistNames.add(artist['name']);
+          }
+
+          // 必要な情報をマップにして追加
+          trackList.add({
+            'id': trackId,
+            'track_name': trackName,
+            'artists': artistNames, // 複数のアーティスト名をリストに格納
+            'image_url': imageUrl,
+          });
+        }
+
+        return trackList; // 最終的なトラック情報リストを返す
+      } else {
+        print('検索失敗: ');
+        return [];
       }
     } catch (e) {
       print('エラーが発生しました: $e');
@@ -142,54 +205,4 @@ class ApiService {
       return [];
     }
   }
-
-  //曲検索のリクエスト
-  Future<List<dynamic>> TrackSearch(String track_name) async {
-    final url = Uri.parse(
-        '$_baseUrl/track/search?track_name=$track_name'); // クエリパラメータをURLに追加
-    try {
-      final response = await http.get(url);
-      
-      //レスポンス確認用のprint
-      // print(response.body);
-      if (response.statusCode == 200) {
-
-        // JSONをデコードしてマップ形式に変換 ----------------------------------<
-        final Map<String, dynamic> data = json.decode(response.body);
-
-        // データを処理して、必要な情報をリストに格納
-        List<Map<String, dynamic>> trackList = [];
-        
-        for (var track in data) {
-          String trackId = track['id'];
-          String trackName = track['track_name'];
-          String album = track['album'];
-          String imageUrl = track['image_url'];
-          
-          // アーティスト情報をすべて取得
-          List<String> artistNames = [];
-          for (var artist in track['artists']) {
-            artistNames.add(artist['name']);
-          }
-          
-          // 必要な情報をマップにして追加
-          trackList.add({
-            'id': trackId,
-            'track_name': trackName,
-            'artists': artistNames, // 複数のアーティスト名をリストに格納
-            'album': album,
-            'image_url': imageUrl,
-          });
-        }
-        
-        return trackList; // 最終的なトラック情報リストを返す
-      } else {
-        print('検索失敗: ');
-      }
-
-    } catch (e) {
-      print('エラーが発生しました: $e');
-      print(e);
-      return [];
-    }
 }
