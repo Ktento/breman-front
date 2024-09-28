@@ -4,6 +4,7 @@ import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
+import 'favorite_song.dart';
 
 bool login = true;
 
@@ -11,42 +12,47 @@ final List<Map<String, dynamic>> r_imageUrls = [
   {
     'id': 'song1', // 楽曲ID
     'title': 'Song Title 1',
-    'url': 'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
+    'url':
+        'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
   },
   {
     'id': 'song2', // 楽曲ID
     'title': 'Song Title 2',
-    'url': 'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
+    'url':
+        'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
   },
   // 他の曲も追加できます
 ];
 
-
 // グループ画像のURLリスト
 final List<Map<String, dynamic>> g_imageUrls = [
- {
+  {
     'id': 'song1', // 楽曲ID
     'title': 'Song Title 1',
-    'url': 'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
+    'url':
+        'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
   },
   {
     'id': 'song2', // 楽曲ID
     'title': 'Song Title 2',
-    'url': 'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
+    'url':
+        'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
   },
 ];
 
 // グループ画像のURLリスト
 final List<Map<String, dynamic>> f_imageUrls = [
- {
+  {
     'id': 'song1', // 楽曲ID
     'title': 'Song Title 1',
-    'url': 'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
+    'url':
+        'https://i.pinimg.com/236x/24/13/d1/2413d199ef41196284c9eec33b90a2a0.jpg', // 画像URL
   },
   {
     'id': 'song2', // 楽曲ID
     'title': 'Song Title 2',
-    'url': 'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
+    'url':
+        'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg', // 画像URL
   },
 ];
 
@@ -391,7 +397,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // お気に入り画面の処理
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SongSearch()),
+                MaterialPageRoute(builder: (context) => FavoriteSong()),
               );
               break;
             case 2:
