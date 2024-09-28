@@ -143,12 +143,10 @@ class ApiService {
     }
   }
 
-  
   // 曲の追加のPOSTリクエスト
   Future<List<dynamic>> TrackAdd(String track_id, String youtube_url) async {
-    final url = Uri.parse('$_baseUrl/tracks/add'); // クエリパラメータをURLに追加
+    final url = Uri.parse('$_baseUrl/tracks/add');
     try {
-      print(track_id);
       final response = await http.post(
         url,
         //POSt,PUT,DELETの場合でbodyは以下のように指定する
@@ -156,10 +154,7 @@ class ApiService {
           'Content-Type': 'application/json', // ヘッダーの設定
         },
         body: json.encode({
-          'track': {
-            'track_id': track_id
-            'youtube_url': youtube_url // ーーーーーーーーーーー　＜＜＜ここおかしいかも＞＞＞
-          }
+          'track': {'track_id': track_id, 'youtube_url': youtube_url}
         }),
       );
       //レスポンス確認用のprint
@@ -185,7 +180,7 @@ class ApiService {
         //失敗した場合はstatusCodeを返す
         return [response.statusCode];
       }
-      } catch (e) {
+    } catch (e) {
       print('エラーが発生しました: $e');
       print(e);
       return [];
