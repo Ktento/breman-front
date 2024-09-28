@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'profile_edit.dart';
 import 'main.dart';
+import 'login.dart';
+import 'account_profile.dart';
 
 class SongSearch extends StatefulWidget {
   @override
@@ -99,6 +101,18 @@ class _SongSearchState extends State<SongSearch> {
               break;
             case 3:
               // アカウント画面の処理は不要
+              if (login) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AccountProfile()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              }
+
               break;
           }
         },
