@@ -1,7 +1,14 @@
 import 'package:bremen_fe/new_account.dart';
 import 'package:flutter/material.dart';
 import 'new_account.dart';
+import 'main.dart';
+import 'main.dart' as global;
 import 'api.dart';
+
+//グローバル変数
+int id = 0;
+String user_id = "";
+String user_name = "";
 
 class Login extends StatefulWidget {
   @override
@@ -91,6 +98,19 @@ class _LoginState extends State<Login> {
                     //response[2]->user_name(名前)
                     print('ログインリクエストを送信しました');
                     print(response[1]);
+
+                    //変数に格納
+                    id = response[0];
+                    user_id = response[1];
+                    user_name = response[2];
+
+                    //login状態をキープ
+                    login = true;
+
+                    //ホーム画面に自動遷移
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+
+
                   } catch (e) {
                     print('ログイン中にエラーが発生しました: $e');
                   }
