@@ -239,7 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // あなたのお気に入りコンテナ
             Container(
-              color: const Color.fromARGB(111, 255, 153, 153),
+              color: const Color.fromARGB(112, 255, 255, 255),
               width: MediaQuery.of(context).size.width,
               height: 30,
               child: Row(
@@ -294,10 +294,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ],
-              ],
-            );
-          },
-
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
