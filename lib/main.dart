@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
+import 'ranking-list.dart';
 
 bool login = false;
 
@@ -139,11 +140,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'ランキング',
-                          style: TextStyle(
-                            fontSize: 20,
+                        child: TextButton(
+                          child: const Text('ランキング'),
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(40, 50), // 幅200、高さ50のボタン
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 20, // フォントサイズを20に設定
+                            ),
                           ),
+                          onPressed: () {
+                            print('アカウント新規作成が押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => RankingList()));
+                          },
                         ),
                       ),
                     ),
@@ -184,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               color: const Color.fromARGB(57, 255, 255, 255),
               width: MediaQuery.of(context).size.width,
-              height: 30,
+              height: 40,
               child: Row(
                 children: [
                   Expanded(
@@ -192,11 +205,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'グループ',
-                          style: TextStyle(
-                            fontSize: 20,
+                        child: TextButton(
+                          child: const Text('グループ'),
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(40, 30), // 幅200、高さ50のボタン
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 20, // フォントサイズを20に設定
+                            ),
                           ),
+                          onPressed: () {
+                            print('アカウント新規作成が押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => RankingList()));
+                          },
                         ),
                       ),
                     ),
@@ -239,9 +264,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
             // あなたのお気に入りコンテナ
             Container(
-              color: const Color.fromARGB(112, 255, 255, 255),
+              color: const Color.fromARGB(110, 255, 255, 255),
               width: MediaQuery.of(context).size.width,
-              height: 30,
+              height: 40,
               child: Row(
                 children: [
                   Expanded(
@@ -249,11 +274,23 @@ class _MyHomePageState extends State<MyHomePage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'あなたのお気に入り',
-                          style: TextStyle(
-                            fontSize: 20,
+                        child: TextButton(
+                          child: const Text('あなたのお気に入り'),
+                          style: TextButton.styleFrom(
+                            minimumSize: Size(40, 30), // 幅200、高さ50のボタン
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 20, // フォントサイズを20に設定
+                            ),
                           ),
+                          onPressed: () {
+                            print('アカウント新規作成が押されました');
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    builder: (context) => RankingList()));
+                          },
                         ),
                       ),
                     ),
@@ -311,7 +348,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.group),
-            label: 'グループ',
+            label: '検索',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
