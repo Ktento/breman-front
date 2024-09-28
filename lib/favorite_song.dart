@@ -14,6 +14,17 @@ class FavoriteSong extends StatefulWidget {
 
 class _FavoriteSongState extends State<FavoriteSong> {
   int _currentIndex = 1; // 現在のインデックスをアカウントプロフィールに設定
+  final List<Map<String, String>> favoriteSongs = [
+    {
+      'title': 'Song Title 1',
+      'image': 'images/image.png',
+    },
+    {
+      'title': 'Song Title 2',
+      'image': 'images/image.png',
+    },
+    // 他の曲も追加できます
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,89 +54,25 @@ class _FavoriteSongState extends State<FavoriteSong> {
               ),
             ),
 
-            // その他のコンテンツをここに追加
-            Container(
-              width: 200,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50), //丸み具合を調整
-                child: Image.asset('images/image.png'),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-              color: const Color.fromARGB(119, 255, 255, 255),
-              width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-              height: 60, // 高さ
-              alignment: Alignment.center, // ボタンを中央に配置
-              child: SizedBox(
-                width: 250, // ボタンの幅
-                height: 30, // ボタンの高さ
-                child: ElevatedButton(
-                  child: const Text('アカウント情報を編集'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange, // 背景色
-                    foregroundColor: Colors.white, // 文字色
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5), // 角の丸みを調整
+            // お気に入りの曲リスト
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: favoriteSongs.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      favoriteSongs[index]['image']!,
+                      fit: BoxFit.cover,
+                      width: 50,  // 幅を指定
+                      height: 50, // 高さを指定
                     ),
                   ),
-                  onPressed: () {
-                    print('アカウントボタンが押されました');
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        //（2） 実際に表示するページ(ウィジェット)を指定する
-                        builder: (context) => ProfileEdit(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-
-            Container(
-              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          '名前:　　' + user_name,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(
-                          'ユーザID: ' + user_id,
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                  title: Text(favoriteSongs[index]['title']!),
+                );
+              },
             ),
           ],
         ),
