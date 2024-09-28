@@ -3,6 +3,7 @@ import 'profile_edit.dart';
 import 'main.dart';
 import 'login.dart';
 import 'account_profile.dart';
+import 'api.dart';
 
 class SongSearch extends StatefulWidget {
   @override
@@ -10,8 +11,11 @@ class SongSearch extends StatefulWidget {
 }
 
 class _SongSearchState extends State<SongSearch> {
+  List<dynamic> _searchResults = [];
+  final ApiService _apiService = ApiService(); // ApiServiceのインスタンス
   int _currentIndex = 2; // 現在のインデックスをアカウントプロフィールに設定
-  final TextEditingController _searchController = TextEditingController(); // TextEditingControllerの追加
+  final TextEditingController _searchController =
+      TextEditingController(); // TextEditingControllerの追加
 
   @override
   void dispose() {
@@ -59,11 +63,20 @@ class _SongSearchState extends State<SongSearch> {
                     )),
               ),
             ),
-            
+
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 String searchText = _searchController.text; // 入力内容を取得
                 print("検索ワード: $searchText"); // 検索ワードをコンソールに表示
+                try {
+                  List response = await _apiService.TrackSearch(searchText);
+                  print(response);
+                  setState(() {
+                    _searchResults = response[0]['id']; // 検索結果を保存
+                  });
+                } catch (e) {
+                  print('ログイン中にエラーが発生しました: $e');
+                }
 
                 //---APIを実装し、曲の検索結果を返す---//
               },
