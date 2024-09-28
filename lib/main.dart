@@ -1,3 +1,4 @@
+import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
 import 'login.dart';
@@ -376,6 +377,10 @@ class _MyHomePageState extends State<MyHomePage> {
               break;
             case 2:
               // グループ画面の処理
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SongSearch()),
+              );
               break;
             case 3:
               // アカウント画面の処理
