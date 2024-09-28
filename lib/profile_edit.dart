@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'login.dart';
 import 'login.dart' as global;
+import 'song_search.dart';
 
 class ProfileEdit extends StatefulWidget {
   @override
@@ -50,7 +51,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               ),
             ),
 
-           Container(
+            Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
@@ -96,7 +97,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                         builder: (context) => AccountProfile(),
                       ),
                     );
-
                   },
                 ),
               ),
@@ -146,6 +146,11 @@ class _ProfileEditState extends State<ProfileEdit> {
               break;
             case 2:
               // グループ画面の処理
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SongSearch()),
+                (Route<dynamic> route) => false,
+              );
               break;
             case 3:
               // アカウント画面の処理は不要
