@@ -1,8 +1,10 @@
+import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'profile_edit.dart';
 import 'main.dart';
 import 'login.dart';
 import 'login.dart' as global;
+import 'song_search.dart';
 
 class AccountProfile extends StatefulWidget {
   @override
@@ -169,6 +171,11 @@ class _AccountProfileState extends State<AccountProfile> {
               break;
             case 2:
               // グループ画面の処理
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => SongSearch()),
+                (Route<dynamic> route) => false,
+              );
               break;
             case 3:
               // アカウント画面の処理は不要
