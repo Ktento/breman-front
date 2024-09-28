@@ -4,7 +4,7 @@ import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
 
-bool login = true;
+bool login = false;
 
 // ランキング画像のURLリスト
 final List<String> r_imageUrls = [
@@ -36,9 +36,15 @@ final List<String> f_imageUrls = [
 
 // メイン関数
 void main() {
-  runApp(MaterialApp(
-    home: MyHomePage(),
-  ));
+  if (login == true) {
+    runApp(MaterialApp(
+      home: MyHomePage(),
+    ));
+  } else {
+    runApp(MaterialApp(
+      home: Login(),
+    ));
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -347,7 +353,7 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'お気に入り',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group),
+            icon: Icon(Icons.search),
             label: '検索',
           ),
           BottomNavigationBarItem(
