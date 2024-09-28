@@ -6,6 +6,7 @@ import 'login.dart';
 import 'login.dart' as global;
 import 'song_search.dart';
 import 'account_profile.dart';
+import 'add_group.dart';
 
 class GroupView extends StatefulWidget {
   @override
@@ -54,25 +55,46 @@ class _GroupViewState extends State<GroupView> {
               ),
             ),
 
-            // お気に入りの曲リスト
-            ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: GroupViews.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      GroupViews[index]['image']!,
-                      fit: BoxFit.cover,
-                      width: 50,  // 幅を指定
-                      height: 50, // 高さを指定
+            //グループ作成
+            Container(
+              child: TextButton(
+                child: const Text('アカウント作成'),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.orange,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddGroup()),
+                  );
+                },
+              ),
+            ),
+
+            // グループリスト
+            Container(
+              color: const Color.fromARGB(158, 255, 255, 255),
+              width: MediaQuery.of(context).size.width,
+              height: 400,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: GroupViews.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        GroupViews[index]['image']!,
+                        fit: BoxFit.cover,
+                        width: 50, // 幅を指定
+                        height: 50, // 高さを指定
+                      ),
                     ),
-                  ),
-                  title: Text(GroupViews[index]['title']!),
-                );
-              },
+                    title: Text(GroupViews[index]['title']!),
+                  );
+                },
+              ),
             ),
           ],
         ),
