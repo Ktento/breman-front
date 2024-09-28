@@ -1,5 +1,6 @@
 import 'package:bremen_fe/new_account.dart';
 import 'package:flutter/material.dart';
+import 'new_account.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -35,14 +36,19 @@ class Login extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'メールアドレス'), //メアド入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'ユーザID', // メアド入力フォーム
+                ),
               ),
             ),
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'パスワード'), //パスワード入力フォーム
+                  border: OutlineInputBorder(),
+                  hintText: 'パスワード', // パスワード入力フォーム
+                ),
+                obscureText: true,
               ),
             ),
             Container(
@@ -56,7 +62,9 @@ class Login extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15), // 角の丸みを調整
                   ),
                 ),
-                onPressed: () {}, //ログインボタンを押したときの処理
+                onPressed: () {
+                  print('ログインボタンが押されました');
+                }, //ログインボタンを押したときの処理
               ),
             ),
             Container(
@@ -67,7 +75,7 @@ class Login extends StatelessWidget {
                   foregroundColor: Colors.orange,
                 ),
                 onPressed: () {
-                  print('ログインボタンが押されました');
+                  print('アカウント新規作成が押されました');
                   Navigator.push(
                       context,
                       MaterialPageRoute(
