@@ -4,6 +4,7 @@ import 'account_profile.dart';
 import 'login.dart';
 import 'add_friend.dart';
 import 'ranking-list.dart';
+import 'group_view.dart';
 
 bool login = false;
 
@@ -227,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 context,
                                 MaterialPageRoute(
                                     // （2） 実際に表示するページ(ウィジェット)を指定する
-                                    builder: (context) => RankingList()));
+                                    builder: (context) => GroupView()));
                           },
                         ),
                       ),
