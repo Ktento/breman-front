@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'SongDetailScreen.dart'; // 新しく作成した詳細画面をインポート
 
 class RankingList extends StatefulWidget {
   @override
@@ -7,15 +8,20 @@ class RankingList extends StatefulWidget {
 }
 
 class _RankingListState extends State<RankingList> {
-  int _currentIndex = 3;
+  int _currentIndex = 0;
 
-  // 音楽ランキングのダミーデータ
   final List<Map<String, dynamic>> _musicRanking = [
-    {'rank': 1, 'title': 'Song A', 'artist': 'Artist X', 'lastWeek': 2},
-    {'rank': 2, 'title': 'Song B', 'artist': 'Artist Y', 'lastWeek': 1},
-    {'rank': 3, 'title': 'Song C', 'artist': 'Artist Z', 'lastWeek': 5},
-    {'rank': 4, 'title': 'Song D', 'artist': 'Artist W', 'lastWeek': 3},
-    {'rank': 5, 'title': 'Song E', 'artist': 'Artist V', 'lastWeek': 4},
+    {
+      'rank': 1,
+      'title': 'Song A',
+      'artist': 'Artist X',
+      'youtubeUrl': 'https://www.youtube.com/watch?v=ZRtdQ81jPUQ',
+      'spotifyUrl': 'https://open.spotify.com/track/7ovUcF5uHTBRzUpB6ZOmvt'
+    },
+    {'rank': 2, 'title': 'Song B', 'artist': 'Artist Y'},
+    {'rank': 3, 'title': 'Song C', 'artist': 'Artist Z'},
+    {'rank': 4, 'title': 'Song D', 'artist': 'Artist W'},
+    {'rank': 5, 'title': 'Song E', 'artist': 'Artist V'},
   ];
 
   @override
@@ -41,21 +47,14 @@ class _RankingListState extends State<RankingList> {
               title: Text(item['title'],
                   style: TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text(item['artist']),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text('前週: ${item['lastWeek']}位'),
-                  Icon(
-                    item['lastWeek'] > item['rank']
-                        ? Icons.arrow_upward
-                        : Icons.arrow_downward,
-                    color: item['lastWeek'] > item['rank']
-                        ? Colors.green
-                        : Colors.red,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SongDetailScreen(song: item),
                   ),
-                ],
-              ),
+                );
+              },
             ),
           );
         },
@@ -72,7 +71,10 @@ class _RankingListState extends State<RankingList> {
         ],
         currentIndex: _currentIndex,
         onTap: (index) {
-        
+          setState(() {
+            _currentIndex = index;
+          });
+
           switch (index) {
             case 0:
               Navigator.pushAndRemoveUntil(

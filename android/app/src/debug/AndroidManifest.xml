@@ -3,5 +3,21 @@
          the Flutter tool needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
+    
     <uses-permission android:name="android.permission.INTERNET"/>
+     
+    <application
+        android:label="app_name"
+        android:icon="@mipmap/ic_launcher">
+        
+        <!-- クエリに外部URLを追加 -->
+        <queries>
+            <intent>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="https" />
+            </intent>
+        </queries>
+
+    </application>
+
 </manifest>
