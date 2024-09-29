@@ -15,14 +15,16 @@ import 'group_view.dart';
 
 bool login = false;
 
+
 //画像のURLがほしい
 //音楽の詳細ページに行きたい
 // ランキング画像のURLリスト
 final List<String> r_imageUrls = [
   'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
-  'https://i.pinimg.com/236x/b8/44/62/b84462069b5784e0bf29d3ce1426925d.jpg',
-  'https://i.pinimg.com/236x/41/56/a6/4156a68baa1b6779860a3ab33d1acfda.jpg',
-  'https://i.pinimg.com/236x/9c/90/59/9c9059cb64d005cd1cb0fdbdf3cbdfde.jpg',
+  'https://i.scdn.co/image/ab67616d0000b2730574601f4bcf70362bc7cce3',
+  'https://i.scdn.co/image/ab67616d0000b27381f55cd879e9480e3ed313df',
+  'https://i.scdn.co/image/ab67616d0000b27389d4982c66a38e88b2b3b272',
+  'https://i.scdn.co/image/ab67616d0000b273ef96f1d50c9562c321ef207e',
 ];
 
 //グループの画像のURLがほしい
@@ -39,14 +41,6 @@ final List<String> g_imageUrls = [
 //音楽の画像のURLがほしい
 //音楽の詳細ページに行きたい
 // グループ画像のURLリスト
-final List<String> f_imageUrls = [
-  'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg',
-  'https://i.pinimg.com/236x/f8/0c/4c/f80c4c91f707605b2dbb8bf412316ca5.jpg',
-  'https://i.pinimg.com/236x/ec/1b/ef/ec1befcde4d75fbb9ec6146ac4a2fb1c.jpg',
-  'https://i.pinimg.com/236x/8c/b1/f7/8cb1f773d581ff99bede558d0eb758ba.jpg',
-  'https://i.pinimg.com/736x/68/26/d5/6826d5f7d9535605cdca6d648dae66c0.jpg',
-  'https://i.pinimg.com/236x/a3/73/0f/a3730ff74e7832087740c2a128538f3f.jpg',
-];
 
 // メイン関数
 void main() {
@@ -329,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
 
-            // お気に入り画像
+
             Container(
               height: 300,
               margin: EdgeInsets.all(8),

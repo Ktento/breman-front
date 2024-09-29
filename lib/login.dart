@@ -10,7 +10,8 @@ int id = 0;
 String user_id = "";
 String user_name = "";
 //お気に入り曲リスト
-List<int> favSongs = [6];
+List<int> favSongs = [];
+List<String> f_imageUrls = [];
 
 class Login extends StatefulWidget {
   @override
@@ -129,6 +130,16 @@ class _LoginState extends State<Login> {
                         favSongs.add(response[i]);
                         print(favSongs[i]);
                       }
+                    }
+
+                    // ApiServiceのインスタンスを作成
+                    ApiService apiService = ApiService();
+
+                    for (int i = 0; i < favSongs.length; i++) {
+                      List response = await apiService.TrackShow(
+                          favSongs[i]); // インスタンスを通じて呼び出す
+                      f_imageUrls.add(response[6]);
+                      print(f_imageUrls[i]);
                     }
 
                     //ホーム画面に自動遷移
