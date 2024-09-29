@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'profile_edit.dart';
 import 'main.dart';
 import 'login.dart';
@@ -158,10 +159,6 @@ class _SongSearchState extends State<SongSearch> {
                               String track_id = "";
                               // お気に入りの状態を切り替える
                               setState(() {
-                                if (index < _favoriteStatus.length) {
-                                  _favoriteStatus[index] =
-                                      !_favoriteStatus[index];
-                                }
                                 print(
                                     'お気に入りボタンが押されました: ${songData['track_name']}');
                                 track_id = songData['id'];
@@ -176,11 +173,16 @@ class _SongSearchState extends State<SongSearch> {
                                   //response[0]ステータスコード
                                   //失敗時409,422,成功時201
                                   print(response);
+                                  if (response[0] == 201 && index < _favoriteStatus.length) {
+                                  _favoriteStatus[index] =
+                                      !_favoriteStatus[index];
+                                }
                                 }
                               } catch (e) {
                                 print('ログイン中にエラーが発生しました: $e');
                               }
-                            },
+
+                              }
                           ),
                         ],
                       ),
