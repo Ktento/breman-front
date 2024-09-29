@@ -155,6 +155,7 @@ class _SongSearchState extends State<SongSearch> {
                                   : null,
                             ),
                             onPressed: () async {
+                              String track_id = "";
                               // お気に入りの状態を切り替える
                               setState(() {
                                 if (index < _favoriteStatus.length) {
@@ -163,15 +164,22 @@ class _SongSearchState extends State<SongSearch> {
                                 }
                                 print(
                                     'お気に入りボタンが押されました: ${songData['track_name']}');
-                                String trackid = songData['id'];
-                                print("トラックID:  " + trackid);
+                                track_id = songData['id'];
+                                print("トラックID:  " + track_id);
                                 print(id);
-                                //                 try {
-                                //   List response = await _apiService.UserTrackAdd(id,trackid);
-                                // } catch (e) {
-                                //   print('ログイン中にエラーが発生しました: $e');
-                                // }
                               });
+                              try {
+                                if (track_id != "") {
+                                  List response =
+                                      await _apiService.UserTrackAdd(
+                                          id, track_id);
+                                  //response[0]ステータスコード
+                                  //失敗時409,422,成功時201
+                                  print(response);
+                                }
+                              } catch (e) {
+                                print('ログイン中にエラーが発生しました: $e');
+                              }
                             },
                           ),
                         ],
