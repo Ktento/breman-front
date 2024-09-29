@@ -2,18 +2,17 @@ import 'package:bremen_fe/new_account.dart';
 import 'package:flutter/material.dart';
 import 'api.dart';
 
-class AddFriend extends StatelessWidget {
+class AddFriend extends StatefulWidget { // StatefulWidgetに変更
   @override
-    _AddFriendState createState() => _AddFriendState();
-  }
+  _AddFriendState createState() => _AddFriendState();
+}
 
-class _AddFriendState extends State<AddFriend>{
+class _AddFriendState extends State<AddFriend> {
   final TextEditingController _userIdController = TextEditingController();
   final ApiService _apiService = ApiService();
   String? _searchResult; // 検索結果を格納する変数
   String? _errorMessage; // エラーメッセージを格納する変数
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,19 +41,17 @@ class _AddFriendState extends State<AddFriend>{
               ),
             ),
 
-            //　ユーザID入力フィールド
+            // ユーザID入力フィールド
             Container(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _userIdController,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(), 
-                    hintText: 'ユーザID'//メアド入力フォーム
-                    ),
-
+                  border: OutlineInputBorder(),
+                  hintText: 'ユーザID', // メアド入力フォーム
+                ),
               ),
             ),
-
 
             Container(
               padding: const EdgeInsets.all(16.0),
@@ -67,13 +64,9 @@ class _AddFriendState extends State<AddFriend>{
                     borderRadius: BorderRadius.circular(15), // 角の丸みを調整
                   ),
                 ),
-
                 onPressed: () async {
-                  
-
-
-
-                }, //ログインボタンを押したときの処理
+                  // フレンド追加の処理をここに書く
+                }, // ログインボタンを押したときの処理
               ),
             ),
           ],
