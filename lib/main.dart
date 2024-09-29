@@ -69,6 +69,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0; // 現在選択されているインデックス
 
+  //自分のお気に入り曲を取得
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
