@@ -88,7 +88,7 @@ class _SongSearchState extends State<SongSearch> {
             // 検索結果を表示するリスト
             if (_searchResults.isNotEmpty)
               Container(
-                height: 500, // リストビューの高さを指定
+                height: 450, // リストビューの高さを指定
                 child: ListView.builder(
                   itemCount: _searchResults.length,
                   itemBuilder: (context, index) {
