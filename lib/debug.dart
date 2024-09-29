@@ -26,9 +26,20 @@ Future<void> debugApiService() async {
   //     "https://youtu.be/Zo0LfdRwzjk?si=bBHQEsQ7eNPK8Lfl");
   // print('Track Add Response: $trackaddResponse');
 
-  // var from_userid_to_groupid = await apiService.from_userid_to_groupid("1");
+// <<<<<<< feature-group_users-from_userid_to_groupid
+//   // var from_userid_to_groupid = await apiService.from_userid_to_groupid("1");
 
-  // print(from_userid_to_groupid);
-  var response = await apiService.from_userid_to_groupid("1");
+//   // print(from_userid_to_groupid);
+//   var response = await apiService.from_userid_to_groupid("1");
+// =======
+//   //ユーザのお気に入り曲の追加を試みる
+//   // var usertrackaddResponse = await apiService.UserTrackAdd(
+//   //   '1',
+//   //   '1',
+//   // );
+//   // print('User Track Add Response: $usertrackaddResponse');
+
+//   var response = await apiService.from_groupid_to_userid("1");
+// >>>>>>> develop
   print(response);
 }
