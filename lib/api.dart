@@ -33,6 +33,26 @@ class ApiService {
       // print(response.body);
       if (response.statusCode == 200) {
         // JSONをデコードしてマップ形式に変換
+        //レスポンスの始まりのかっこによって型が変わる
+        //レスポンスが以下の場合([]なのでList) -> List<dynamic>
+        /*
+        [
+          {
+            "id": 10,
+            "user_id": "test",
+            "user_name": "test"
+          }
+        ]*/
+        //レスポンスが以下の場合({}なのでMap) -> Map<String, dynamic>
+        /*
+          {
+            "id": 1,
+            "user_id": "test",
+            "user_name": "test",
+            "password_digest": "test",
+          }
+        */
+
         final Map<String, dynamic> data = json.decode(response.body);
         if (data['user'] != null) {
           int id = data['user']['id'];
@@ -113,26 +133,113 @@ class ApiService {
 
   //ユーザ検索のGETリクエスト
   Future<List<dynamic>> UserSearch(String user_id) async {
-    final url = Uri.parse(
-        '$_baseUrl/users/search?search_user_id=$user_id'); // クエリパラメータをURLに追加
+    final url = Uri.parse('$_baseUrl/users/search?search_user_id=$user_id');
     try {
       final response = await http.get(url);
-      //レスポンス確認用のprint
-      // print(response.body);
       if (response.statusCode == 200) {
-        // JSONをデコードしてマップ形式に変換
-        final Map<String, dynamic> data = json.decode(response.body);
-        if (data['user'] != null) {
-          int id = data['user']['id'];
-          String user_id = data['user']['user_id'];
-          String user_name = data['user']['user_name'];
+        final List<dynamic> data = json.decode(response.body);
+        if (data.isNotEmpty) {
+          int id = data[0]['id'];
+          String user_id = data[0]['user_id'];
+          String user_name = data[0]['user_name'];
           return [id, user_id, user_name];
         } else {
-          print('userオブジェクトがnullです。レスポンスデータ: $data');
+          print('レスポンスは空です。');
           return [];
         }
       } else {
         print('検索失敗: ${response.statusCode}');
+        return [response.statusCode];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      return [];
+    }
+  }
+
+  //曲検索のリクエスト
+  //{response[0]["id"]}このようにすると1曲目のidを知れる
+  Future<List<dynamic>> TrackSearch(String track_name) async {
+    final url = Uri.parse(
+        '$_baseUrl/tracks/search?track_name=$track_name'); // クエリパラメータをURLに追加
+    try {
+      final response = await http.get(url);
+
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換 ----------------------------------<
+        final List<dynamic> data = json.decode(response.body);
+
+        // データを処理して、必要な情報をリストに格納
+        List<Map<String, dynamic>> trackList = [];
+
+        for (var track in data) {
+          String trackId = track['id'];
+          String trackName = track['track_name'];
+          String imageUrl = track['image_url'];
+
+          // アーティスト情報をすべて取得
+          List<String> artistNames = [];
+          for (var artist in track['artists']) {
+            artistNames.add(artist['name']);
+          }
+
+          // 必要な情報をマップにして追加
+          trackList.add({
+            'id': trackId,
+            'track_name': trackName,
+            'artists': artistNames, // 複数のアーティスト名をリストに格納
+            'image_url': imageUrl,
+          });
+        }
+
+        return trackList; // 最終的なトラック情報リストを返す
+      } else {
+        print('検索失敗: ');
+        return [];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
+
+  // 曲の追加のPOSTリクエスト
+  Future<List<dynamic>> TrackAdd(String track_id, String youtube_url) async {
+    final url = Uri.parse('$_baseUrl/tracks/add');
+    try {
+      final response = await http.post(
+        url,
+        //POSt,PUT,DELETの場合でbodyは以下のように指定する
+        headers: {
+          'Content-Type': 'application/json', // ヘッダーの設定
+        },
+        body: json.encode({
+          'track': {'track_id': track_id, 'youtube_url': youtube_url}
+        }),
+      );
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 201) {
+        // JSONをデコードしてマップ形式に変換
+        final Map<String, dynamic> data = json.decode(response.body);
+        return [
+          response.statusCode,
+          data['id'],
+          data['track_name'],
+          data['track_category'],
+          data['track_artist'],
+          data['spotify_url'],
+          data['youtube_url'],
+          data['image_url'],
+          data['sp_track_id'],
+          data['sp_artist_id'],
+          data['listen_count']
+        ];
+      } else {
+        print('追加失敗: ${response.statusCode}');
         //失敗した場合はstatusCodeを返す
         return [response.statusCode];
       }

@@ -1,3 +1,10 @@
+// // デバックするときは以下の文にする
+// import 'debug.dart';
+
+// void main() async {
+//   await debugApiService(); // debug.dartの関数を呼び出す
+// }
+
 import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
 import 'account_profile.dart';
@@ -8,6 +15,8 @@ import 'group_view.dart';
 
 bool login = false;
 
+//画像のURLがほしい
+//音楽の詳細ページに行きたい
 // ランキング画像のURLリスト
 final List<String> r_imageUrls = [
   'https://i.scdn.co/image/ab67616d0000b273e4da12ab8213633c552ecfa9',
@@ -16,6 +25,7 @@ final List<String> r_imageUrls = [
   'https://i.pinimg.com/236x/9c/90/59/9c9059cb64d005cd1cb0fdbdf3cbdfde.jpg',
 ];
 
+//グループの画像のURLがほしい
 // グループ画像のURLリスト
 final List<String> g_imageUrls = [
   'https://i.pinimg.com/236x/37/f6/28/37f628fcafd4fd222cc3c3899948e84b.jpg',
@@ -26,6 +36,8 @@ final List<String> g_imageUrls = [
   'https://i.pinimg.com/236x/de/67/54/de67546f2a3cfedae325399aa55fedef.jpg',
 ];
 
+//音楽の画像のURLがほしい
+//音楽の詳細ページに行きたい
 // グループ画像のURLリスト
 final List<String> f_imageUrls = [
   'https://i.pinimg.com/236x/59/c3/bf/59c3bf10ac4f402a0364e2278473492a.jpg',
@@ -157,12 +169,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 20, // フォントサイズを20に設定
                             ),
                           ),
+                          //ランキングのボタン(文字)が押されたとき
                           onPressed: () {
-                            print('アカウント新規作成が押されました');
+                            print('ランキングが押されました');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    //ランキング画面に遷移
                                     builder: (context) => RankingList()));
                           },
                         ),
@@ -180,6 +193,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Row(
                   children: r_imageUrls.map((url) {
                     return GestureDetector(
+                      //ランキングの画像が押されたときの処理
+                      //画像URLごとに管理されてると思う
                       onTap: () {
                         print('画像がタップされました: $url');
                       },
@@ -222,6 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 20, // フォントサイズを20に設定
                             ),
                           ),
+                          //グループ(文字)ボタンを押したとき
                           onPressed: () {
                             print('アカウント新規作成が押されました');
                             Navigator.push(
@@ -252,6 +268,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount: g_imageUrls.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
+                    //グループアイコンが押されたとき
+                    //多分URLで管理されてる
                     onTap: () {
                       print('画像がタップされました: ${g_imageUrls[index]}');
                     },
@@ -291,12 +309,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 20, // フォントサイズを20に設定
                             ),
                           ),
+                          //お気に入り(文字)が押されたとき
                           onPressed: () {
                             print('アカウント新規作成が押されました');
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    // （2） 実際に表示するページ(ウィジェット)を指定する
+                                    // お気に入りリストに遷移させたい。
                                     builder: (context) => RankingList()));
                           },
                         ),
@@ -321,6 +340,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount: f_imageUrls.length,
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
+                    //お気に入り曲の画像がタッチされたときの処理
+                    //多分URLで管理されてる
                     onTap: () {
                       print('画像がタップされました: ${f_imageUrls[index]}');
                     },

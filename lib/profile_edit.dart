@@ -90,6 +90,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                   onPressed: () {
                     print('アカウントボタンが押されました');
 
+                    //----テキストボックスから情報を取得、APIを実装し、情報を変更----//
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(

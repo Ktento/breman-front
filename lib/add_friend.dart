@@ -51,6 +51,7 @@ class _AddFriendState extends State<AddFriend>{
                     border: OutlineInputBorder(), 
                     hintText: 'ユーザID'//メアド入力フォーム
                     ),
+
               ),
             ),
 
@@ -66,6 +67,7 @@ class _AddFriendState extends State<AddFriend>{
                     borderRadius: BorderRadius.circular(15), // 角の丸みを調整
                   ),
                 ),
+
                 onPressed: () async {
                   
 
