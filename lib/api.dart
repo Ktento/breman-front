@@ -291,7 +291,7 @@ class ApiService {
   }
 
   //ユーザのお気に入り曲の追加のPOSTリクエスト
-  Future<List<dynamic>> UserTrackAdd(String user_id, String track_id) async {
+  Future<List<dynamic>> UserTrackAdd(int user_id, String track_id) async {
     final url = Uri.parse('$_baseUrl/user_tracks/add');
     try {
       final response = await http.post(
