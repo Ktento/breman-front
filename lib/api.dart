@@ -1,6 +1,5 @@
 import 'dart:ffi';
 
-import 'package:bremen_fe/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -253,7 +252,7 @@ class ApiService {
 
   Future<List<dynamic>> from_userid_to_groupid(String user_id) async {
     final url = Uri.parse(
-        '$_baseUrl/group_users/?from_userid_to_groupid=$user_id'); // クエリパラメータをURLに追加
+        '$_baseUrl/group_users/from_userid_to_groupid?user_id=$user_id'); // クエリパラメータをURLに追加
     try {
       final response = await http.get(url);
       //レスポンス確認用のprint
