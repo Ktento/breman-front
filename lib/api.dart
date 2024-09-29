@@ -290,6 +290,11 @@ class ApiService {
     }
   }
 
+
+  Future<List<dynamic>> from_userid_to_groupid(String user_id) async {
+    final url = Uri.parse(
+        '$_baseUrl/group_users/from_userid_to_groupid?user_id=$user_id'); // クエリパラメータをURLに追加
+    try {
   //ユーザのお気に入り曲の追加のPOSTリクエスト
   Future<List<dynamic>> UserTrackAdd(int user_id, String track_id) async {
     final url = Uri.parse('$_baseUrl/user_tracks/add');
@@ -376,23 +381,24 @@ class ApiService {
       //http.post ->postリクエスト
       //http.put ->putリクエスト
       //http.delete ->deleteリクエスト
+      
       final response = await http.get(url);
       //レスポンス確認用のprint
       // print(response.body);
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
-        List<Map<String, dynamic>> userlist = [];
+        List<Map<String, dynamic>> grouplist = [];
 
-        for (var user in data) {
-          int user_id = user['user_id'];
+        for (var group in data) {
+          int group_id = group['group_id'];
 
           // 必要な情報をマップにして追加
-          userlist.add({'user_id': user_id});
+          grouplist.add({'group_id': group_id});
         }
 
-        return userlist; // 最終的なトラック情報リストを返す
+        return grouplist; // 最終的なトラック情報リストを返す
       } else {
-        print('groupidがnullです。レスポンスデータ: $group_id');
+        print('useridがnullです。レスポンスデータ: $user_id');
         return [];
       }
     } catch (e) {
