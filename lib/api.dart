@@ -214,7 +214,7 @@ class ApiService {
       final response = await http.get(url);
 
       //レスポンス確認用のprint
-      print(response.body);
+      //print(response.body);
       if (response.statusCode == 200) {
         // JSONをデコードしてマップ形式に変換
         final Map<String, dynamic> data = json.decode(response.body);
@@ -326,6 +326,36 @@ class ApiService {
         print('追加失敗: ${response.statusCode}');
         //失敗した場合はstatusCodeを返す
         return [response.statusCode];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
+
+  //トラックIDから曲の情報をGETリクエスト
+  Future<List<dynamic>> UserTrackShow(int user_id) async {
+    final url = Uri.parse(
+        '$_baseUrl/user_tracks/show?user_id=$user_id'); // クエリパラメータをURLに追加
+    try {
+      final response = await http.get(url);
+
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        if (data['track_ids'] != null) {
+        return List<int>.from(data['track_ids']); // track_idsのリストを返す
+        } else  {
+            print('track_idsがレスポンスに含まれていません。レスポンスデータ: $data');
+            return []; // track_idsが存在しない場合は空のリストを返す
+        }
+      } else {
+        print('曲一覧取得失敗: ${response.statusCode}');
+        return [];
       }
     } catch (e) {
       print('エラーが発生しました: $e');
