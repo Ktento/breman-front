@@ -334,6 +334,38 @@ class ApiService {
     }
   }
 
+  //フレンドリストを取得するGETリクエスト
+  Future<List<dynamic>> FriendsShow(int search_user_id) async {
+    final url = Uri.parse('$_baseUrl/friends/show?search_user_id=$search_user_id');
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body);
+        
+          if (data.isNotEmpty) {
+            List<Map<String, dynamic>> friendsList = [];
+
+          for (var friend in data) {
+          // 各フレンドの情報をマップとして追加
+            friendsList.add({
+              'id': friend['id'],
+              'A_user_id': friend['A_user_id'],
+              'B_user_id': friend['B_user_id'],
+            });
+          }
+          return friendsList; // すべてのフレンド情報を返す
+          
+          } else {
+            print('レスポンスは空です。');
+            return [];
+          }
+      } else {
+        print('検索失敗: ${response.statusCode}');
+        return [response.statusCode];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+
   Future<List<dynamic>> from_groupid_to_userid(String group_id) async {
     final url = Uri.parse(
         //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
