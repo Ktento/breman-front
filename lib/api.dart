@@ -214,25 +214,25 @@ class ApiService {
       final response = await http.get(url);
 
       //レスポンス確認用のprint
-      // print(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
         // JSONをデコードしてマップ形式に変換
         final Map<String, dynamic> data = json.decode(response.body);
 
-        if (data['track'] != null) {
-          int id = data['track']['id'];
-          String track_name = data['track']['track_name'];
-          String track_category = data['track']['track_category'];
-          String track_artist = data['track']['track_artist'];
-          String spotify_url = data['track']['spotify_url'];
-          String youtube_url = data['track']['user_id'];
-          String sp_track_id = data['track']['sp_track_id'];
-          String sp_artist_id = data['track']['sp_artist_id'];
-          int listen_count = data['track']['listen_count'];
+        if (data.containsKey('id') && data.containsKey('track_name')) {
+          int id = data['id'];
+          String track_name = data['track_name'];
+          String track_category = data['track_category'];
+          String track_artist = data['track_artist'];
+          String spotify_url = data['spotify_url'];
+          String youtube_url = data['youtube_url'];
+          String sp_track_id = data['sp_track_id'];
+          String sp_artist_id = data['sp_artist_id'];
+          int listen_count = data['listen_count'];
 
           return [id, track_name, track_category, track_artist, spotify_url, youtube_url, sp_track_id, sp_artist_id, listen_count];
         } else {
-          print('trackオブジェクトがnullです。レスポンスデータ: $data');
+          print('必要なデータが存在しません。レスポンスデータ: $data');
           return [];
         }
       } else {
