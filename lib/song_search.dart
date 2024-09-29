@@ -4,6 +4,7 @@ import 'main.dart';
 import 'login.dart';
 import 'account_profile.dart';
 import 'api.dart';
+//import 'login.dart' as global;
 
 class SongSearch extends StatefulWidget {
   @override
@@ -76,7 +77,8 @@ class _SongSearchState extends State<SongSearch> {
                   print(response);
                   setState(() {
                     _searchResults = response; // 検索結果を保存
-                    _favoriteStatus = List<bool>.filled(response.length, false); // お気に入り状態を初期化
+                    _favoriteStatus = List<bool>.filled(
+                        response.length, false); // お気に入り状態を初期化
                   });
                 } catch (e) {
                   print('ログイン中にエラーが発生しました: $e');
@@ -112,7 +114,8 @@ class _SongSearchState extends State<SongSearch> {
                             icon: Icon(Icons.add), // 空のハートアイコンを表示
                             onPressed: () {
                               // お気に入りに追加する処理
-                              print('グループ追加ボタンが押されました: ${songData['track_name']}');
+                              print(
+                                  'グループ追加ボタンが押されました: ${songData['track_name']}');
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -142,16 +145,32 @@ class _SongSearchState extends State<SongSearch> {
                           SizedBox(width: 8), // ボタン同士の間にスペースを追加
                           IconButton(
                             icon: Icon(
-                              _favoriteStatus.length > index && _favoriteStatus[index] ? Icons.favorite : Icons.favorite_border,
-                              color: _favoriteStatus.length > index && _favoriteStatus[index] ? Colors.red : null,
+                              _favoriteStatus.length > index &&
+                                      _favoriteStatus[index]
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: _favoriteStatus.length > index &&
+                                      _favoriteStatus[index]
+                                  ? Colors.red
+                                  : null,
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               // お気に入りの状態を切り替える
                               setState(() {
                                 if (index < _favoriteStatus.length) {
-                                  _favoriteStatus[index] = !_favoriteStatus[index];
+                                  _favoriteStatus[index] =
+                                      !_favoriteStatus[index];
                                 }
-                                print('お気に入りボタンが押されました: ${songData['track_name']}');
+                                print(
+                                    'お気に入りボタンが押されました: ${songData['track_name']}');
+                                String trackid = songData['id'];
+                                print("トラックID:  " + trackid);
+                                print(id);
+                                //                 try {
+                                //   List response = await _apiService.UserTrackAdd(id,trackid);
+                                // } catch (e) {
+                                //   print('ログイン中にエラーが発生しました: $e');
+                                // }
                               });
                             },
                           ),
