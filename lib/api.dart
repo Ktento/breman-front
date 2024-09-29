@@ -207,7 +207,7 @@ class ApiService {
   }
 
   //トラックIDから曲の情報をGETリクエスト
-  Future<List<dynamic>> TrackShow(String track_id) async {
+  Future<List<dynamic>> TrackShow(int track_id) async {
     final url = Uri.parse(
         '$_baseUrl/tracks/show?track_id=$track_id'); // クエリパラメータをURLに追加
     try {
