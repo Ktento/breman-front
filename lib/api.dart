@@ -293,4 +293,66 @@ class ApiService {
       return [];
     }
   }
+
+
+  Future<List<dynamic>> from_groupid_to_userid(String group_id) async {
+    final url = Uri.parse(
+        //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
+        //今回はuser_idとpasswordを使用するのでこのような形になっている
+        '$_baseUrl/group_users/?from_groupid_to_userid=$group_id'); // クエリパラメータをURLに追加
+    try {
+      //http.get ->getリクエスト
+      //http.post ->postリクエスト
+      //http.put ->putリクエスト
+      //http.delete ->deleteリクエスト
+      final response = await http.get(url);
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換
+        //レスポンスの始まりのかっこによって型が変わる
+        //レスポンスが以下の場合([]なのでList) -> List<dynamic>
+        /*
+        [
+          {
+            "id": 10,
+            "user_id": "test",
+            "user_name": "test"
+          }
+        ]*/
+        //レスポンスが以下の場合({}なのでMap) -> Map<String, dynamic>
+        /*
+          {
+            "id": 1,
+            "user_id": "test",
+            "user_name": "test",
+            "password_digest": "test",
+          }
+        */
+
+         final List<dynamic> data = json.decode(response.body);
+         List<Map<String, dynamic>> userlist = [];
+
+        for (var user in data) {
+          String user_id = user['user_id'];
+
+
+          // 必要な情報をマップにして追加
+          userlist.add({
+            'user_id': user_id
+          });
+        }
+
+        return userlist; // 最終的なトラック情報リストを返す
+
+        } else {
+          print('groupidがnullです。レスポンスデータ: $group_id');
+          return [];
+        }
+} catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
 }
