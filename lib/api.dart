@@ -249,4 +249,48 @@ class ApiService {
       return [];
     }
   }
+
+  //ユーザのお気に入り曲の追加のPOSTリクエスト
+  Future<List<dynamic>> UserTrackAdd(String user_id, String track_id) async {
+    final url = Uri.parse('$_baseUrl/user_tracks/add');
+    try {
+      final response = await http.post(
+        url,
+        //POSt,PUT,DELETの場合でbodyは以下のように指定する
+        headers: {
+          'Content-Type': 'application/json', // ヘッダーの設定
+        },
+        body: json.encode({
+          'user_track': {'user_id': user_id, 'track_id': track_id}
+        }),
+      );
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 201) {
+        // JSONをデコードしてマップ形式に変換
+        final Map<String, dynamic> data = json.decode(response.body);
+        return [
+          response.statusCode,
+          data['id'],
+          data['track_name'],
+          data['track_category'],
+          data['track_artist'],
+          data['spotify_url'],
+          data['youtube_url'],
+          data['image_url'],
+          data['sp_track_id'],
+          data['sp_artist_id'],
+          data['listen_count']
+        ];
+      } else {
+        print('追加失敗: ${response.statusCode}');
+        //失敗した場合はstatusCodeを返す
+        return [response.statusCode];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
 }
