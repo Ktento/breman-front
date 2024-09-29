@@ -226,11 +226,22 @@ class ApiService {
           String track_artist = data['track_artist'];
           String spotify_url = data['spotify_url'];
           String youtube_url = data['youtube_url'];
+          String image_url = data['image_url'];
           String sp_track_id = data['sp_track_id'];
           String sp_artist_id = data['sp_artist_id'];
           int listen_count = data['listen_count'];
 
-          return [id, track_name, track_category, track_artist, spotify_url, youtube_url, sp_track_id, sp_artist_id, listen_count];
+          return [
+            id,
+            track_name,
+            track_category,
+            track_artist,
+            spotify_url,
+            youtube_url,
+            image_url,
+            sp_artist_id,
+            listen_count
+          ];
         } else {
           print('必要なデータが存在しません。レスポンスデータ: $data');
           return [];
@@ -348,10 +359,10 @@ class ApiService {
         final Map<String, dynamic> data = json.decode(response.body);
 
         if (data['track_ids'] != null) {
-        return List<int>.from(data['track_ids']); // track_idsのリストを返す
-        } else  {
-            print('track_idsがレスポンスに含まれていません。レスポンスデータ: $data');
-            return []; // track_idsが存在しない場合は空のリストを返す
+          return List<int>.from(data['track_ids']); // track_idsのリストを返す
+        } else {
+          print('track_idsがレスポンスに含まれていません。レスポンスデータ: $data');
+          return []; // track_idsが存在しない場合は空のリストを返す
         }
       } else {
         print('曲一覧取得失敗: ${response.statusCode}');
