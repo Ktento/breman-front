@@ -298,7 +298,7 @@ class ApiService {
     final url = Uri.parse(
         //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
         //今回はuser_idとpasswordを使用するのでこのような形になっている
-        '$_baseUrl/group_users/?from_groupid_to_userid=$group_id'); // クエリパラメータをURLに追加
+        '$_baseUrl/group_users/from_groupid_to_userid/?group_id=$group_id'); // クエリパラメータをURLに追加
     try {
       //http.get ->getリクエスト
       //http.post ->postリクエスト
