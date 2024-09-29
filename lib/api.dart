@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:bremen_fe/login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -249,4 +250,67 @@ class ApiService {
       return [];
     }
   }
+
+   Future<List<dynamic>> from_userid_to_groupid(String userid) async {
+    final url = Uri.parse(
+        //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
+        //今回はuser_idとpasswordを使用するのでこのような形になっている
+        '$_baseUrl/group_users/?from_userid_to_groupid=$userid'); // クエリパラメータをURLに追加
+    try {
+      //http.get ->getリクエスト
+      //http.post ->postリクエスト
+      //http.put ->putリクエスト
+      //http.delete ->deleteリクエスト
+      final response = await http.get(url);
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換
+        //レスポンスの始まりのかっこによって型が変わる
+        //レスポンスが以下の場合([]なのでList) -> List<dynamic>
+        /*
+        [
+          {
+            "id": 10,
+            "user_id": "test",
+            "user_name": "test"
+          }
+        ]*/
+        //レスポンスが以下の場合({}なのでMap) -> Map<String, dynamic>
+        /*
+          {
+            "id": 1,
+            "user_id": "test",
+            "user_name": "test",
+            "password_digest": "test",
+          }
+        */
+
+         final List<dynamic> data = json.decode(response.body);
+         List<Map<String, dynamic>> grouplist = [];
+
+        for (var group in data) {
+          String group_id = group['group_id'];
+
+
+          // 必要な情報をマップにして追加
+          grouplist.add({
+            'group_id': group_id
+          });
+        }
+
+        return grouplist; // 最終的なトラック情報リストを返す
+
+        } else {
+          print('useridがnullです。レスポンスデータ: $user_id');
+          return [];
+        }
+} catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
+
+
 }
