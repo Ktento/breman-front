@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:http/retry.dart';
+
 class ApiService {
   final String _baseUrl =
       'https://agile-adventure-production.up.railway.app/'; // 実際のAPIサーバーのURLに変更してください
@@ -230,7 +232,17 @@ class ApiService {
           String sp_artist_id = data['sp_artist_id'];
           int listen_count = data['listen_count'];
 
-          return [id, track_name, track_category, track_artist, spotify_url, youtube_url, sp_track_id, sp_artist_id, listen_count];
+          return [
+            id,
+            track_name,
+            track_category,
+            track_artist,
+            spotify_url,
+            youtube_url,
+            sp_track_id,
+            sp_artist_id,
+            listen_count
+          ];
         } else {
           print('必要なデータが存在しません。レスポンスデータ: $data');
           return [];
@@ -331,6 +343,34 @@ class ApiService {
       print('エラーが発生しました: $e');
       print(e);
       return [];
+    }
+  }
+
+  //フレンド追加のPOSTリクエスト
+  Future<bool> AddFriend(int A_user_id, String B_user_id) async {
+    final url = Uri.parse('$_baseUrl/friends/add');
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json', // ヘッダーの設定
+        },
+        body: json.encode({
+          'A_user_id': A_user_id,
+          'B_user_id': B_user_id,
+        }),
+      );
+
+      //レスポンス確認
+      if (response.statusCode == 200) {
+        return true; // 成功
+      } else {
+        print('フレンド追加失敗: ${response.statusCode}');
+        return false; // 失敗
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      return false; //れいがい
     }
   }
 }
