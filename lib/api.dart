@@ -251,11 +251,11 @@ class ApiService {
     }
   }
 
-   Future<List<dynamic>> from_userid_to_groupid(String userid) async {
+   Future<List<dynamic>> from_userid_to_groupid(String user_id) async {
     final url = Uri.parse(
         //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
         //今回はuser_idとpasswordを使用するのでこのような形になっている
-        '$_baseUrl/group_users/?from_userid_to_groupid=$userid'); // クエリパラメータをURLに追加
+        '$_baseUrl/group_users/?from_userid_to_groupid=$user_id'); // クエリパラメータをURLに追加
     try {
       //http.get ->getリクエスト
       //http.post ->postリクエスト
