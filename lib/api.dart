@@ -196,7 +196,47 @@ class ApiService {
 
         return trackList; // 最終的なトラック情報リストを返す
       } else {
-        print('検索失敗: ');
+        print('検索失敗: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
+
+  //トラックIDから曲の情報をGETリクエスト
+  Future<List<dynamic>> TrackShow(int track_id) async {
+    final url = Uri.parse(
+        '$_baseUrl/tracks/show?track_id=$track_id'); // クエリパラメータをURLに追加
+    try {
+      final response = await http.get(url);
+
+      //レスポンス確認用のprint
+      print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換
+        final Map<String, dynamic> data = json.decode(response.body);
+
+        if (data.containsKey('id') && data.containsKey('track_name')) {
+          int id = data['id'];
+          String track_name = data['track_name'];
+          String track_category = data['track_category'];
+          String track_artist = data['track_artist'];
+          String spotify_url = data['spotify_url'];
+          String youtube_url = data['youtube_url'];
+          String sp_track_id = data['sp_track_id'];
+          String sp_artist_id = data['sp_artist_id'];
+          int listen_count = data['listen_count'];
+
+          return [id, track_name, track_category, track_artist, spotify_url, youtube_url, sp_track_id, sp_artist_id, listen_count];
+        } else {
+          print('必要なデータが存在しません。レスポンスデータ: $data');
+          return [];
+        }
+      } else {
+        print('検索失敗: ${response.statusCode}');
         return [];
       }
     } catch (e) {
