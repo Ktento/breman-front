@@ -196,7 +196,55 @@ class ApiService {
 
         return trackList; // 最終的なトラック情報リストを返す
       } else {
-        print('検索失敗: ');
+        print('検索失敗: ${response.statusCode}');
+        return [];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
+
+  //トラックIDから曲の情報をGETリクエスト  ＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜＜　実装中
+  Future<List<dynamic>> TrackShow(String sp_track_id) async {
+    final url = Uri.parse(
+        '$_baseUrl/tracks/show?track_id=$sp_track_id'); // クエリパラメータをURLに追加
+    try {
+      final response = await http.get(url);
+
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        // JSONをデコードしてマップ形式に変換 ----------------------------------<
+        final List<dynamic> data = json.decode(response.body);
+
+        // データを処理して、必要な情報をリストに格納
+        List<Map<String, dynamic>> trackList = [];
+
+        for (var track in data) {
+          String trackId = track['id'];
+          String trackName = track['track_name'];
+          String imageUrl = track['image_url'];
+
+          // アーティスト情報をすべて取得
+          List<String> artistNames = [];
+          for (var artist in track['artists']) {
+            artistNames.add(artist['name']);
+          }
+
+          // 必要な情報をマップにして追加
+          trackList.add({
+            'id': trackId,
+            'track_name': trackName,
+            'artists': artistNames, // 複数のアーティスト名をリストに格納
+            'image_url': imageUrl,
+          });
+        }
+
+        return trackList; // 最終的なトラック情報リストを返す
+      } else {
+        print('検索失敗: ${response.statusCode}');
         return [];
       }
     } catch (e) {
