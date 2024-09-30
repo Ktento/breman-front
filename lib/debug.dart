@@ -39,7 +39,5 @@ Future<void> debugApiService() async {
 //   // );
 //   // print('User Track Add Response: $usertrackaddResponse');
 
-//   var response = await apiService.from_groupid_to_userid("1");
-// >>>>>>> develop
-  print(response);
+//   var response = await apiService.from_groupid_to_userid("1");s
 }

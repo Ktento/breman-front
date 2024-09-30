@@ -230,7 +230,17 @@ class ApiService {
           String sp_artist_id = data['sp_artist_id'];
           int listen_count = data['listen_count'];
 
-          return [id, track_name, track_category, track_artist, spotify_url, youtube_url, sp_track_id, sp_artist_id, listen_count];
+          return [
+            id,
+            track_name,
+            track_category,
+            track_artist,
+            spotify_url,
+            youtube_url,
+            sp_track_id,
+            sp_artist_id,
+            listen_count
+          ];
         } else {
           print('必要なデータが存在しません。レスポンスデータ: $data');
           return [];
@@ -290,11 +300,10 @@ class ApiService {
     }
   }
 
-
-  Future<List<dynamic>> from_userid_to_groupid(String user_id) async {
-    final url = Uri.parse(
-        '$_baseUrl/group_users/from_userid_to_groupid?user_id=$user_id'); // クエリパラメータをURLに追加
-    try {
+  // Future<List<dynamic>> from_userid_to_groupid(String user_id) async {
+  //   final url = Uri.parse(
+  //       '$_baseUrl/group_users/from_userid_to_groupid?user_id=$user_id'); // クエリパラメータをURLに追加
+  //   try {
   //ユーザのお気に入り曲の追加のPOSTリクエスト
   Future<List<dynamic>> UserTrackAdd(int user_id, String track_id) async {
     final url = Uri.parse('$_baseUrl/user_tracks/add');
@@ -339,72 +348,73 @@ class ApiService {
     }
   }
 
-  //フレンドリストを取得するGETリクエスト
-  Future<List<dynamic>> FriendsShow(int search_user_id) async {
-    final url = Uri.parse('$_baseUrl/friends/show?search_user_id=$search_user_id');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body);
-        
-          if (data.isNotEmpty) {
-            List<Map<String, dynamic>> friendsList = [];
+  // //フレンドリストを取得するGETリクエスト
+  // Future<List<dynamic>> FriendsShow(int search_user_id) async {
+  //   final url = Uri.parse('$_baseUrl/friends/show?search_user_id=$search_user_id');
+  //   try {
+  //     final response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> data = json.decode(response.body);
 
-          for (var friend in data) {
-          // 各フレンドの情報をマップとして追加
-            friendsList.add({
-              'id': friend['id'],
-              'A_user_id': friend['A_user_id'],
-              'B_user_id': friend['B_user_id'],
-            });
-          }
-          return friendsList; // すべてのフレンド情報を返す
-          
-          } else {
-            print('レスポンスは空です。');
-            return [];
-          }
-      } else {
-        print('検索失敗: ${response.statusCode}');
-        return [response.statusCode];
-      }
-    } catch (e) {
-      print('エラーが発生しました: $e');
+  //         if (data.isNotEmpty) {
+  //           List<Map<String, dynamic>> friendsList = [];
 
-  Future<List<dynamic>> from_groupid_to_userid(String group_id) async {
-    final url = Uri.parse(
-        //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
-        //今回はuser_idとpasswordを使用するのでこのような形になっている
-        '$_baseUrl/group_users/from_groupid_to_userid/?group_id=$group_id'); // クエリパラメータをURLに追加
-    try {
-      //http.get ->getリクエスト
-      //http.post ->postリクエスト
-      //http.put ->putリクエスト
-      //http.delete ->deleteリクエスト
-      
-      final response = await http.get(url);
-      //レスポンス確認用のprint
-      // print(response.body);
-      if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body);
-        List<Map<String, dynamic>> grouplist = [];
+  //         for (var friend in data) {
+  //         // 各フレンドの情報をマップとして追加
+  //           friendsList.add({
+  //             'id': friend['id'],
+  //             'A_user_id': friend['A_user_id'],
+  //             'B_user_id': friend['B_user_id'],
+  //           });
+  //         }
+  //         return friendsList; // すべてのフレンド情報を返す
 
-        for (var group in data) {
-          int group_id = group['group_id'];
+  //         } else {
+  //           print('レスポンスは空です。');
+  //           return [];
+  //         }
+  //     } else {
+  //       print('検索失敗: ${response.statusCode}');
+  //       return [response.statusCode];
+  //     }
+  //   } catch (e) {
+  //     print('エラーが発生しました: $e');
 
-          // 必要な情報をマップにして追加
-          grouplist.add({'group_id': group_id});
-        }
+//   Future<List<dynamic>> from_groupid_to_userid(String group_id) async {
+//     final url = Uri.parse(
+//         //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
+//         //今回はuser_idとpasswordを使用するのでこのような形になっている
+//         '$_baseUrl/group_users/from_groupid_to_userid/?group_id=$group_id'); // クエリパラメータをURLに追加
+//     try {
+//       //http.get ->getリクエスト
+//       //http.post ->postリクエスト
+//       //http.put ->putリクエスト
+//       //http.delete ->deleteリクエスト
 
-        return grouplist; // 最終的なトラック情報リストを返す
-      } else {
-        print('useridがnullです。レスポンスデータ: $user_id');
-        return [];
-      }
-    } catch (e) {
-      print('エラーが発生しました: $e');
-      print(e);
-      return [];
-    }
-  }
+//       final response = await http.get(url);
+//       //レスポンス確認用のprint
+//       // print(response.body);
+//       if (response.statusCode == 200) {
+//         final List<dynamic> data = json.decode(response.body);
+//         List<Map<String, dynamic>> grouplist = [];
+
+//         for (var group in data) {
+//           int group_id = group['group_id'];
+
+//           // 必要な情報をマップにして追加
+//           grouplist.add({'group_id': group_id});
+//         }
+
+//         return grouplist; // 最終的なトラック情報リストを返す
+//       } else {
+//         print('useridがnullです。レスポンスデータ: $user_id');
+//         return [];
+//       }
+//     } catch (e) {
+//       print('エラーが発生しました: $e');
+//       print(e);
+//       return [];
+//     }
+//   }
+// }
 }
