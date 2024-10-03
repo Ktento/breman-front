@@ -239,6 +239,7 @@ class ApiService {
             spotify_url,
             youtube_url,
             image_url,
+            sp_track_id,
             sp_artist_id,
             listen_count
           ];
@@ -345,27 +346,100 @@ class ApiService {
     }
   }
 
-  //トラックIDから曲の情報をGETリクエスト
-  Future<List<dynamic>> UserTrackShow(int user_id) async {
-    final url = Uri.parse(
-        '$_baseUrl/user_tracks/show?user_id=$user_id'); // クエリパラメータをURLに追加
-    try {
-      final response = await http.get(url);
+  // //フレンドリストを取得するGETリクエスト
+  // Future<List<dynamic>> FriendsShow(int search_user_id) async {
+  //   final url = Uri.parse('$_baseUrl/friends/show?search_user_id=$search_user_id');
+  //   try {
+  //     final response = await http.get(url);
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> data = json.decode(response.body);
 
+  //         if (data.isNotEmpty) {
+  //           List<Map<String, dynamic>> friendsList = [];
+
+  //         for (var friend in data) {
+  //         // 各フレンドの情報をマップとして追加
+  //           friendsList.add({
+  //             'id': friend['id'],
+  //             'A_user_id': friend['A_user_id'],
+  //             'B_user_id': friend['B_user_id'],
+  //           });
+  //         }
+  //         return friendsList; // すべてのフレンド情報を返す
+
+  //         } else {
+  //           print('レスポンスは空です。');
+  //           return [];
+  //         }
+  //     } else {
+  //       print('検索失敗: ${response.statusCode}');
+  //       return [response.statusCode];
+  //     }
+  //   } catch (e) {
+  //     print('エラーが発生しました: $e');
+
+  Future<List<dynamic>> from_groupid_to_userid(String group_id) async {
+    final url = Uri.parse(
+        //クエリパラメータを使用する際は?user_id=$userId&password=$password'を変更
+        //今回はuser_idとpasswordを使用するのでこのような形になっている
+        '$_baseUrl/group_users/from_groupid_to_userid/?group_id=$group_id'); // クエリパラメータをURLに追加
+    try {
+      //http.get ->getリクエスト
+      //http.post ->postリクエスト
+      //http.put ->putリクエスト
+      //http.delete ->deleteリクエスト
+
+      final response = await http.get(url);
       //レスポンス確認用のprint
       // print(response.body);
       if (response.statusCode == 200) {
-        // JSONをデコードしてマップ形式に変換
-        final Map<String, dynamic> data = json.decode(response.body);
+        final List<dynamic> data = json.decode(response.body);
+        List<Map<String, dynamic>> grouplist = [];
 
-        if (data['track_ids'] != null) {
-          return List<int>.from(data['track_ids']); // track_idsのリストを返す
-        } else {
-          print('track_idsがレスポンスに含まれていません。レスポンスデータ: $data');
-          return []; // track_idsが存在しない場合は空のリストを返す
+        for (var group in data) {
+          int user_id = group['user_id'];
+
+          // 必要な情報をマップにして追加
+          grouplist.add({'user_id': user_id});
         }
+
+        return grouplist; // 最終的なトラック情報リストを返す
       } else {
-        print('曲一覧取得失敗: ${response.statusCode}');
+        print('useridがnullです。レスポンスデータ: $response');
+        return [];
+      }
+    } catch (e) {
+      print('エラーが発生しました: $e');
+      print(e);
+      return [];
+    }
+  }
+
+  Future<List<dynamic>> from_userid_to_groupid(String user_id) async {
+    final url = Uri.parse(
+        '$_baseUrl/group_users/from_userid_to_groupid?user_id=$user_id'); // クエリパラメータをURLに追加
+    try {
+      //http.get ->getリクエスト
+      //http.post ->postリクエスト
+      //http.put ->putリクエスト
+      //http.delete ->deleteリクエスト
+
+      final response = await http.get(url);
+      //レスポンス確認用のprint
+      // print(response.body);
+      if (response.statusCode == 200) {
+        final List<dynamic> data = json.decode(response.body);
+        List<Map<String, dynamic>> grouplist = [];
+
+        for (var group in data) {
+          int group_id = group['group_id'];
+          // 必要な情報をマップにして追加
+          grouplist.add({'group_id': group_id});
+        }
+
+        return grouplist; // 最終的なトラック情報リストを返す
+      } else {
+        print('groupidがnullです。レスポンスデータ: $response');
         return [];
       }
     } catch (e) {

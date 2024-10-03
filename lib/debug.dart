@@ -27,9 +27,17 @@ Future<void> debugApiService() async {
   // print('Track Add Response: $trackaddResponse');
 
   //ユーザのお気に入り曲の追加を試みる
-  var usertrackaddResponse = await apiService.UserTrackAdd(
-    '1',
-    '1',
-  );
-  print('User Track Add Response: $usertrackaddResponse');
+  // var usertrackaddResponse = await apiService.UserTrackAdd(
+  //   '1',
+  //   '1',
+  // );
+  // print('User Track Add Response: $usertrackaddResponse');
+
+  //グループに所属するuser_idを出力する機能を試みる
+  // var response = await apiService.from_groupid_to_userid("1");
+  // print(response);
+
+  //user_idからどのグループに所属するか検索する機能を試みる
+  // var from_userid_to_groupid = await apiService.from_userid_to_groupid("1");
+  // print(from_userid_to_groupid);
 }
