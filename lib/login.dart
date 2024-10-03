@@ -9,6 +9,9 @@ import 'api.dart';
 int id = 0;
 String user_id = "";
 String user_name = "";
+//お気に入り曲リスト
+List<int> favSongs = [];
+List<String> f_imageUrls = [];
 
 class Login extends StatefulWidget {
   @override
@@ -106,11 +109,42 @@ class _LoginState extends State<Login> {
 
                     //login状態をキープ
                     login = true;
+                  } catch (e) {
+                    print('ログイン中にエラーが発生しました: $e');
+                  }
+                  //自分のお気に入り曲を取得
+                  print("ID");
+                  print(id);
+                  try {
+                    List response = await _apiService.UserTrackShow(id);
+                    //response[0]->id(userを登録するときに自動でつく主キー)
+                    //response[1]->user_id(自分で決めるuser_id)
+                    //response[2]->user_name(名前)
+                    print("お気に入りの曲");
+                    print(response[1]);
+
+                    for (int i = 0; i < response.length; i++) {
+                      if (response[i] == null) {
+                        break;
+                      } else {
+                        favSongs.add(response[i]);
+                        print(favSongs[i]);
+                      }
+                    }
+
+                    // ApiServiceのインスタンスを作成
+                    ApiService apiService = ApiService();
+
+                    for (int i = 0; i < favSongs.length; i++) {
+                      List response = await apiService.TrackShow(
+                          favSongs[i]); // インスタンスを通じて呼び出す
+                      f_imageUrls.add(response[6]);
+                      print(f_imageUrls[i]);
+                    }
 
                     //ホーム画面に自動遷移
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-
-
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyHomePage()));
                   } catch (e) {
                     print('ログイン中にエラーが発生しました: $e');
                   }

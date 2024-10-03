@@ -226,6 +226,7 @@ class ApiService {
           String track_artist = data['track_artist'];
           String spotify_url = data['spotify_url'];
           String youtube_url = data['youtube_url'];
+          String image_url = data['image_url'];
           String sp_track_id = data['sp_track_id'];
           String sp_artist_id = data['sp_artist_id'];
           int listen_count = data['listen_count'];
@@ -237,6 +238,7 @@ class ApiService {
             track_artist,
             spotify_url,
             youtube_url,
+            image_url,
             sp_track_id,
             sp_artist_id,
             listen_count
@@ -431,7 +433,6 @@ class ApiService {
 
         for (var group in data) {
           int group_id = group['group_id'];
-
           // 必要な情報をマップにして追加
           grouplist.add({'group_id': group_id});
         }
