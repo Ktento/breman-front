@@ -259,7 +259,7 @@ class ApiService {
   }
 
   // 曲の追加のPOSTリクエスト
-  Future<List<dynamic>> TrackAdd(String track_id, String youtube_url) async {
+  Future<List<dynamic>> TrackAdd(String sp_track_id, String youtube_url) async {
     final url = Uri.parse('$_baseUrl/tracks/add');
     try {
       final response = await http.post(
@@ -269,7 +269,7 @@ class ApiService {
           'Content-Type': 'application/json', // ヘッダーの設定
         },
         body: json.encode({
-          'track': {'track_id': track_id, 'youtube_url': youtube_url}
+          'track': {'sp_track_id': sp_track_id, 'youtube_url': youtube_url}
         }),
       );
       //レスポンス確認用のprint
@@ -303,8 +303,9 @@ class ApiService {
   }
 
   //ユーザのお気に入り曲の追加のPOSTリクエスト
-  Future<List<dynamic>> UserTrackAdd(int user_id, String track_id) async {
+  Future<List<dynamic>> UserTrackAdd(int user_id, String sp_track_id) async {
     final url = Uri.parse('$_baseUrl/user_tracks/add');
+
     try {
       final response = await http.post(
         url,
@@ -313,7 +314,7 @@ class ApiService {
           'Content-Type': 'application/json', // ヘッダーの設定
         },
         body: json.encode({
-          'user_track': {'user_id': user_id, 'track_id': track_id}
+          'user_track': {'user_id': user_id, 'sp_track_id': sp_track_id}
         }),
       );
       //レスポンス確認用のprint
