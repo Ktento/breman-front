@@ -27,9 +27,13 @@ Future<void> debugApiService() async {
   // print('Track Add Response: $trackaddResponse');
 
   //ユーザのお気に入り曲の追加を試みる
-  var usertrackaddResponse = await apiService.UserTrackAdd(
-    '1',
-    '1',
-  );
-  print('User Track Add Response: $usertrackaddResponse');
+  // var usertrackaddResponse = await apiService.UserTrackAdd(
+  //   '1',
+  //   '1',
+  // );
+  // print('User Track Add Response: $usertrackaddResponse');
+
+  //フレンド追加を試みる
+  // var response = await apiService.AddFriend(15, 'A');
+  // print(response);
 }

@@ -362,7 +362,7 @@ class ApiService {
       );
 
       //レスポンス確認
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return true; // 成功
       } else {
         print('フレンド追加失敗: ${response.statusCode}');
@@ -370,7 +370,7 @@ class ApiService {
       }
     } catch (e) {
       print('エラーが発生しました: $e');
-      return false; //れいがい
+      return false; //例外
     }
   }
 }
