@@ -12,7 +12,6 @@ class _AddFriendState extends State<AddFriend> {
   final ApiService _apiService = ApiService();
   String? _searchResult; // 検索結果を格納する変数
   String? _errorMessage; // エラーメッセージを格納する変数
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
