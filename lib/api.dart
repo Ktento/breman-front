@@ -324,15 +324,8 @@ class ApiService {
         return [
           response.statusCode,
           data['id'],
-          data['track_name'],
-          data['track_category'],
-          data['track_artist'],
-          data['spotify_url'],
-          data['youtube_url'],
-          data['image_url'],
-          data['sp_track_id'],
-          data['sp_artist_id'],
-          data['listen_count']
+          data['user_id'],
+          data['track_id']
         ];
       } else {
         print('追加失敗: ${response.statusCode}');

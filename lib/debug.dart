@@ -27,11 +27,11 @@ Future<void> debugApiService() async {
   // print('Track Add Response: $trackaddResponse');
 
   //ユーザのお気に入り曲の追加を試みる
-  // var usertrackaddResponse = await apiService.UserTrackAdd(
-  //   '1',
-  //   '1',
-  // );
-  // print('User Track Add Response: $usertrackaddResponse');
+  var usertrackaddResponse = await apiService.UserTrackAdd(
+    2,
+    '3',
+  );
+  print('User Track Add Response: $usertrackaddResponse');
 
   //グループに所属するuser_idを出力する機能を試みる
   // var response = await apiService.from_groupid_to_userid("1");
