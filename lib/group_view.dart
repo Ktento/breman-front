@@ -1,17 +1,32 @@
-import 'package:bremen_fe/account_profile.dart';
+import 'package:bremen_fe/song_search.dart';
 import 'package:flutter/material.dart';
+import 'profile_edit.dart';
 import 'main.dart';
 import 'login.dart';
 import 'login.dart' as global;
 import 'song_search.dart';
+import 'account_profile.dart';
+import 'add_group.dart';
 
-class ProfileEdit extends StatefulWidget {
+class GroupView extends StatefulWidget {
   @override
-  _ProfileEditState createState() => _ProfileEditState();
+  _GroupViewState createState() => _GroupViewState();
 }
 
-class _ProfileEditState extends State<ProfileEdit> {
-  int _currentIndex = 3; // 現在のインデックスをアカウントプロフィールに設定
+class _GroupViewState extends State<GroupView> {
+  int _currentIndex = 1; // 現在のインデックスをアカウントプロフィールに設定
+  final List<Map<String, String>> GroupViews = [
+    {
+      'title': 'Song Title 1',
+      'image': 'images/image.png',
+    },
+    {
+      'title': 'Song Title 2',
+      'image': 'images/image.png',
+    },
+    // APIで情報を取得して、上の配列に格納
+    //とってくる情報は変えてもいいお
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,73 +49,52 @@ class _ProfileEditState extends State<ProfileEdit> {
                   ),
                   SizedBox(width: 8), // 戻るボタンとテキストの間にスペースを追加
                   Text(
-                    'プロフィール編集',
+                    'グループ',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
 
-            // その他のコンテンツをここに追加
+            //グループ作成
             Container(
-              width: 200,
-              height: 200,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(50), //丸み具合を調整
-                child: Image.asset('images/image.png'),
-              ),
-            ),
-
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: '名前:' + user_name,
+              child: TextButton(
+                child: const Text('アカウント作成'),
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.orange,
                 ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AddGroup()),
+                  );
+                },
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'ユーザID:' + user_id,
-                ),
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              color: const Color.fromARGB(119, 255, 255, 255),
-              width: MediaQuery.of(context).size.width, // 画面の幅に合わせる
-              height: 70, // 高さ
-              alignment: Alignment.center, // ボタンを中央に配置
-              child: SizedBox(
-                width: 250, // ボタンの幅
-                height: 30, // ボタンの高さ
-                child: ElevatedButton(
-                  child: const Text('編集を保存'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange, // 背景色
-                    foregroundColor: Colors.white, // 文字色
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5), // 角の丸みを調整
-                    ),
-                  ),
-                  onPressed: () {
-                    print('アカウントボタンが押されました');
 
-                    //----テキストボックスから情報を取得、APIを実装し、情報を変更----//
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        //（2） 実際に表示するページ(ウィジェット)を指定する
-                        builder: (context) => AccountProfile(),
+            // グループリスト
+            Container(
+              color: const Color.fromARGB(158, 255, 255, 255),
+              width: MediaQuery.of(context).size.width,
+              height: 400,
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: GroupViews.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.asset(
+                        GroupViews[index]['image']!,
+                        fit: BoxFit.cover,
+                        width: 50, // 幅を指定
+                        height: 50, // 高さを指定
                       ),
-                    );
-                  },
-                ),
+                    ),
+                    title: Text(GroupViews[index]['title']!),
+                  );
+                },
               ),
             ),
           ],
@@ -144,10 +138,14 @@ class _ProfileEditState extends State<ProfileEdit> {
               );
               break;
             case 1:
-              // お気に入り画面の処理
+              // お気に入り画面がすでに表示されている場合でも何かしらの処理を追加可能
+              // 例: リロードする場合
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => GroupView()),
+              );
               break;
             case 2:
-              // グループ画面の処理
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => SongSearch()),
@@ -155,7 +153,18 @@ class _ProfileEditState extends State<ProfileEdit> {
               );
               break;
             case 3:
-              // アカウント画面の処理は不要
+              // アカウント画面の処理
+              if (login) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AccountProfile()),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              }
               break;
           }
         },
